@@ -57,6 +57,35 @@
       "caption": "A powerful rendition of The Star-Spangled Banner by The President’s Own United States Marine Band. 🇺🇸 Public-domain U.S. government performance. Source: Wikimedia Commons. #MarineBand #NationalAnthem #LiveMusic #OffTheRecord",
       "youtube_title": "U.S. Marine Band — The Star-Spangled Banner 🇺🇸 #Shorts",
       "notes": "Public-domain composition and U.S. Marine Band federal employee performance documented by Wikimedia Commons file page. Intended U.S. rights analysis; platform policies, trademarks, and territorial differences still require review. Candidate for internal render first; DO NOT auto-publish. Source download URL needs runner verification."
+    },
+    {
+      "id": "chris-stapleton-tennessee-whiskey-live-candidate",
+      "status": "research",
+      "artist": "Chris Stapleton",
+      "title": "Tennessee Whiskey",
+      "event": "Live performance — source not yet selected",
+      "source_url": null,
+      "platforms": [
+        "instagram",
+        "youtube"
+      ],
+      "scheduled_local": null,
+      "video_url": null,
+      "do_not_repost": true,
+      "rights": {
+        "verification": "pending",
+        "licensor": null,
+        "license_id": null,
+        "evidence_url": null,
+        "commercial_use": false,
+        "editing": false,
+        "audio": false,
+        "video": false,
+        "redistribution": false,
+        "platforms": [],
+        "expires_on": null
+      },
+      "notes": "Mainstream country/R&B crossover discovery candidate only. Do not render or publish until verified rights holder permission for composition, master/performance audio and video footage; no approved source URL."
     }
   ]
 }
