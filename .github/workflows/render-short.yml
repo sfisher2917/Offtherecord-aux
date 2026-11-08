@@ -14,10 +14,19 @@ on:
         description: 'Song or performance title'
         required: true
         type: string
+      event:
+        description: 'Verified live performance event or venue'
+        required: true
+        type: string
+      start:
+        description: 'Clip start time in seconds'
+        required: true
+        default: '0'
+        type: string
       duration:
         description: 'Seconds (maximum 60)'
         required: true
-        default: '42'
+        default: '59'
         type: string
       rights_confirmed:
         description: 'I have rights to reuse both video and audio on intended platforms'
@@ -46,8 +55,10 @@ jobs:
         env:
           ARTIST: ${{ inputs.artist }}
           TITLE: ${{ inputs.title }}
+          EVENT: ${{ inputs.event }}
+          START: ${{ inputs.start }}
           DURATION: ${{ inputs.duration }}
-        run: python render.py --source source-video.mp4 --artist "$ARTIST" --title "$TITLE" --duration "$DURATION"
+        run: python render.py --source source-video.mp4 --artist "$ARTIST" --title "$TITLE" --event "$EVENT" --start "$START" --duration "$DURATION"
       - name: Upload finished MP4
         uses: actions/upload-artifact@v4
         with:
