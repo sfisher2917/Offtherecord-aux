@@ -94,13 +94,23 @@
         "Relevant live recording and performer rights holders"
       ],
       "licensing_outreach": {
-        "status": "contact_identified_not_sent",
+        "status": "outreach_sent_pending_clearance",
         "primary_contact_url": "https://www.cmaworld.com/contact/",
         "primary_contact_phone": "+1 615 244-2840",
         "management_contact": "teamcs@chrisstapleton.com",
         "management_source": "https://redlightmanagement.com/artists/chris-stapleton/",
         "request_scope": "59-second excerpt of 2015 CMA live duet, edited/branded vertical video, worldwide commercial Instagram Reels and YouTube Shorts, audio and video, ongoing distribution; ask about publisher/performance clearances",
-        "permission_received": false
+        "permission_received": false,
+        "confirmed_sent": [
+          {
+            "recipient": "CMApress@cmaworld.com",
+            "message_id": "1a1b9bb0b233d59d"
+          },
+          {
+            "recipient": "teamcs@chrisstapleton.com",
+            "message_id": "1a1b9be52fcba56b"
+          }
+        ]
       }
     }
   ]
