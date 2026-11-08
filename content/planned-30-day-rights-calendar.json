@@ -1,0 +1,1066 @@
+{
+  "description": "30-day candidate plan; no item is licensed or actually scheduled; sources are discovery/watch links not downloadable media permissions",
+  "created_on": "2026-11-08",
+  "window_start": "2026-11-09",
+  "window_end": "2026-12-08",
+  "slots": [
+    {
+      "date": "2026-11-09",
+      "time_local": "10:00",
+      "timezone": "America/New_York",
+      "candidate": {
+        "artist": "Chris Stapleton & Justin Timberlake",
+        "song": "Tennessee Whiskey",
+        "category": "country",
+        "source_type": "official CMA 2015 live",
+        "source_url": "https://www.youtube.com/watch?v=N34fUhOU6dc",
+        "rights_owner_inquiry": "CMA and artist management",
+        "status": "rights_pending",
+        "rights_verified": false
+      },
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-09",
+      "time_local": "16:00",
+      "timezone": "America/New_York",
+      "candidate": {
+        "artist": "Ella Langley",
+        "song": "Choosin' Texas",
+        "category": "country",
+        "source_type": "official CMA Awards live video gallery",
+        "source_url": "https://cmaawards.com/video/",
+        "rights_owner_inquiry": "CMA",
+        "status": "rights_pending",
+        "rights_verified": false
+      },
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-09",
+      "time_local": "19:00",
+      "timezone": "America/New_York",
+      "candidate": {
+        "artist": "BigXthaPlug feat. Luke Combs",
+        "song": "Pray Hard",
+        "category": "country",
+        "source_type": "official CMA Awards live video gallery",
+        "source_url": "https://cmaawards.com/video/",
+        "rights_owner_inquiry": "CMA",
+        "status": "rights_pending",
+        "rights_verified": false
+      },
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-10",
+      "time_local": "10:00",
+      "timezone": "America/New_York",
+      "candidate": {
+        "artist": "Lainey Wilson",
+        "song": "Ring Finger",
+        "category": "country",
+        "source_type": "official CMA Awards live video gallery",
+        "source_url": "https://cmaawards.com/video/",
+        "rights_owner_inquiry": "CMA",
+        "status": "rights_pending",
+        "rights_verified": false
+      },
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-10",
+      "time_local": "16:00",
+      "timezone": "America/New_York",
+      "candidate": {
+        "artist": "Miranda Lambert & Chris Stapleton",
+        "song": "A Song To Sing",
+        "category": "country",
+        "source_type": "official CMA Awards live video gallery",
+        "source_url": "https://cmaawards.com/video/",
+        "rights_owner_inquiry": "CMA",
+        "status": "rights_pending",
+        "rights_verified": false
+      },
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-10",
+      "time_local": "19:00",
+      "timezone": "America/New_York",
+      "candidate": {
+        "artist": "Shaboozey & Stephen Wilson Jr.",
+        "song": "Took A Walk",
+        "category": "country",
+        "source_type": "official CMA Awards live video gallery",
+        "source_url": "https://cmaawards.com/video/",
+        "rights_owner_inquiry": "CMA",
+        "status": "rights_pending",
+        "rights_verified": false
+      },
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-11",
+      "time_local": "10:00",
+      "timezone": "America/New_York",
+      "candidate": {
+        "artist": "Luke Combs",
+        "song": "Back in the Saddle",
+        "category": "country",
+        "source_type": "official CMA Awards live video gallery",
+        "source_url": "https://cmaawards.com/video/",
+        "rights_owner_inquiry": "CMA",
+        "status": "rights_pending",
+        "rights_verified": false
+      },
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-11",
+      "time_local": "16:00",
+      "timezone": "America/New_York",
+      "candidate": {
+        "artist": "Chris Stapleton",
+        "song": "Bad As I Used To Be",
+        "category": "country",
+        "source_type": "official CMA Awards live video gallery",
+        "source_url": "https://cmaawards.com/video/",
+        "rights_owner_inquiry": "CMA",
+        "status": "rights_pending",
+        "rights_verified": false
+      },
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-11",
+      "time_local": "19:00",
+      "timezone": "America/New_York",
+      "candidate": {
+        "artist": "Riley Green",
+        "song": "Worst Way",
+        "category": "country",
+        "source_type": "official CMA Awards live video gallery",
+        "source_url": "https://cmaawards.com/video/",
+        "rights_owner_inquiry": "CMA",
+        "status": "rights_pending",
+        "rights_verified": false
+      },
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-12",
+      "time_local": "10:00",
+      "timezone": "America/New_York",
+      "candidate": {
+        "artist": "Tucker Wetmore",
+        "song": "Wind Up Missin' You",
+        "category": "country",
+        "source_type": "official CMA Awards live video gallery",
+        "source_url": "https://cmaawards.com/video/",
+        "rights_owner_inquiry": "CMA",
+        "status": "rights_pending",
+        "rights_verified": false
+      },
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-12",
+      "time_local": "16:00",
+      "timezone": "America/New_York",
+      "candidate": {
+        "artist": "Kenny Chesney",
+        "song": "When the Sun Goes Down",
+        "category": "country",
+        "source_type": "official CMA Awards live video gallery",
+        "source_url": "https://cmaawards.com/video/",
+        "rights_owner_inquiry": "CMA",
+        "status": "rights_pending",
+        "rights_verified": false
+      },
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-12",
+      "time_local": "19:00",
+      "timezone": "America/New_York",
+      "candidate": {
+        "artist": "Kenny Chesney",
+        "song": "American Kids",
+        "category": "country",
+        "source_type": "official CMA Awards live video gallery",
+        "source_url": "https://cmaawards.com/video/",
+        "rights_owner_inquiry": "CMA",
+        "status": "rights_pending",
+        "rights_verified": false
+      },
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-13",
+      "time_local": "10:00",
+      "timezone": "America/New_York",
+      "candidate": {
+        "artist": "Old Dominion",
+        "song": "Break Up With Him / Memory Lane / One Man Band / Hotel Key / Snapback",
+        "category": "country",
+        "source_type": "official CMA Awards live video gallery",
+        "source_url": "https://cmaawards.com/video/",
+        "rights_owner_inquiry": "CMA",
+        "status": "rights_pending",
+        "rights_verified": false
+      },
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-13",
+      "time_local": "16:00",
+      "timezone": "America/New_York",
+      "candidate": {
+        "artist": "Kelsea Ballerini",
+        "song": "I Sit In Parks",
+        "category": "country",
+        "source_type": "official CMA Awards live video gallery",
+        "source_url": "https://cmaawards.com/video/",
+        "rights_owner_inquiry": "CMA",
+        "status": "rights_pending",
+        "rights_verified": false
+      },
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-13",
+      "time_local": "19:00",
+      "timezone": "America/New_York",
+      "candidate": {
+        "artist": "Stephen Wilson Jr.",
+        "song": "Stand By Me",
+        "category": "country",
+        "source_type": "official CMA Awards live video gallery",
+        "source_url": "https://cmaawards.com/video/",
+        "rights_owner_inquiry": "CMA",
+        "status": "rights_pending",
+        "rights_verified": false
+      },
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-14",
+      "time_local": "10:00",
+      "timezone": "America/New_York",
+      "candidate": {
+        "artist": "The Red Clay Strays",
+        "song": "People Hatin'",
+        "category": "country",
+        "source_type": "official CMA Awards live video gallery",
+        "source_url": "https://cmaawards.com/video/",
+        "rights_owner_inquiry": "CMA",
+        "status": "rights_pending",
+        "rights_verified": false
+      },
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-14",
+      "time_local": "16:00",
+      "timezone": "America/New_York",
+      "candidate": {
+        "artist": "Lainey Wilson",
+        "song": "Iconic Country Music Medley",
+        "category": "country",
+        "source_type": "official CMA Awards live video gallery",
+        "source_url": "https://cmaawards.com/video/",
+        "rights_owner_inquiry": "CMA",
+        "status": "rights_pending",
+        "rights_verified": false
+      },
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-14",
+      "time_local": "19:00",
+      "timezone": "America/New_York",
+      "candidate": {
+        "artist": "Usher",
+        "song": "You Make Me Wanna...",
+        "category": "rnb",
+        "source_type": "NPR Tiny Desk live set",
+        "source_url": "https://www.youtube.com/watch?v=up8ODGFWgFg",
+        "rights_owner_inquiry": "NPR",
+        "status": "rights_pending",
+        "rights_verified": false
+      },
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-15",
+      "time_local": "10:00",
+      "timezone": "America/New_York",
+      "candidate": {
+        "artist": "Usher",
+        "song": "Superstar",
+        "category": "rnb",
+        "source_type": "NPR Tiny Desk live set",
+        "source_url": "https://www.youtube.com/watch?v=up8ODGFWgFg",
+        "rights_owner_inquiry": "NPR",
+        "status": "rights_pending",
+        "rights_verified": false
+      },
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-15",
+      "time_local": "16:00",
+      "timezone": "America/New_York",
+      "candidate": {
+        "artist": "Usher",
+        "song": "U Don't Have to Call",
+        "category": "rnb",
+        "source_type": "NPR Tiny Desk live set",
+        "source_url": "https://www.youtube.com/watch?v=up8ODGFWgFg",
+        "rights_owner_inquiry": "NPR",
+        "status": "rights_pending",
+        "rights_verified": false
+      },
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-15",
+      "time_local": "19:00",
+      "timezone": "America/New_York",
+      "candidate": {
+        "artist": "Usher",
+        "song": "Nice & Slow",
+        "category": "rnb",
+        "source_type": "NPR Tiny Desk live set",
+        "source_url": "https://www.youtube.com/watch?v=up8ODGFWgFg",
+        "rights_owner_inquiry": "NPR",
+        "status": "rights_pending",
+        "rights_verified": false
+      },
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-16",
+      "time_local": "10:00",
+      "timezone": "America/New_York",
+      "candidate": {
+        "artist": "Usher",
+        "song": "Confessions Part II",
+        "category": "rnb",
+        "source_type": "NPR Tiny Desk live set",
+        "source_url": "https://www.youtube.com/watch?v=up8ODGFWgFg",
+        "rights_owner_inquiry": "NPR",
+        "status": "rights_pending",
+        "rights_verified": false
+      },
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-16",
+      "time_local": "16:00",
+      "timezone": "America/New_York",
+      "candidate": {
+        "artist": "Usher",
+        "song": "My Way",
+        "category": "rnb",
+        "source_type": "NPR Tiny Desk live set",
+        "source_url": "https://www.youtube.com/watch?v=up8ODGFWgFg",
+        "rights_owner_inquiry": "NPR",
+        "status": "rights_pending",
+        "rights_verified": false
+      },
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-16",
+      "time_local": "19:00",
+      "timezone": "America/New_York",
+      "candidate": {
+        "artist": "Juvenile",
+        "song": "400 Degreez",
+        "category": "rap",
+        "source_type": "NPR Tiny Desk live set",
+        "source_url": "https://www.youtube.com/watch?v=kes2P4IC2bQ",
+        "rights_owner_inquiry": "NPR",
+        "status": "rights_pending",
+        "rights_verified": false
+      },
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-17",
+      "time_local": "10:00",
+      "timezone": "America/New_York",
+      "candidate": {
+        "artist": "Juvenile",
+        "song": "Bling Bling",
+        "category": "rap",
+        "source_type": "NPR Tiny Desk live set",
+        "source_url": "https://www.youtube.com/watch?v=kes2P4IC2bQ",
+        "rights_owner_inquiry": "NPR",
+        "status": "rights_pending",
+        "rights_verified": false
+      },
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-17",
+      "time_local": "16:00",
+      "timezone": "America/New_York",
+      "candidate": {
+        "artist": "Juvenile",
+        "song": "Ha",
+        "category": "rap",
+        "source_type": "NPR Tiny Desk live set",
+        "source_url": "https://www.youtube.com/watch?v=kes2P4IC2bQ",
+        "rights_owner_inquiry": "NPR",
+        "status": "rights_pending",
+        "rights_verified": false
+      },
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-17",
+      "time_local": "19:00",
+      "timezone": "America/New_York",
+      "candidate": {
+        "artist": "Juvenile",
+        "song": "Set It Off",
+        "category": "rap",
+        "source_type": "NPR Tiny Desk live set",
+        "source_url": "https://www.youtube.com/watch?v=kes2P4IC2bQ",
+        "rights_owner_inquiry": "NPR",
+        "status": "rights_pending",
+        "rights_verified": false
+      },
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-18",
+      "time_local": "10:00",
+      "timezone": "America/New_York",
+      "candidate": {
+        "artist": "Juvenile",
+        "song": "Slow Motion",
+        "category": "rap",
+        "source_type": "NPR Tiny Desk live set",
+        "source_url": "https://www.youtube.com/watch?v=kes2P4IC2bQ",
+        "rights_owner_inquiry": "NPR",
+        "status": "rights_pending",
+        "rights_verified": false
+      },
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-18",
+      "time_local": "16:00",
+      "timezone": "America/New_York",
+      "candidate": {
+        "artist": "Juvenile",
+        "song": "Rodeo",
+        "category": "rap",
+        "source_type": "NPR Tiny Desk live set",
+        "source_url": "https://www.youtube.com/watch?v=kes2P4IC2bQ",
+        "rights_owner_inquiry": "NPR",
+        "status": "rights_pending",
+        "rights_verified": false
+      },
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-18",
+      "time_local": "19:00",
+      "timezone": "America/New_York",
+      "candidate": {
+        "artist": "Juvenile",
+        "song": "I Need A Hot Girl",
+        "category": "rap",
+        "source_type": "NPR Tiny Desk live set",
+        "source_url": "https://www.youtube.com/watch?v=kes2P4IC2bQ",
+        "rights_owner_inquiry": "NPR",
+        "status": "rights_pending",
+        "rights_verified": false
+      },
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-19",
+      "time_local": "10:00",
+      "timezone": "America/New_York",
+      "candidate": {
+        "artist": "Juvenile",
+        "song": "Project Bitch",
+        "category": "rap",
+        "source_type": "NPR Tiny Desk live set",
+        "source_url": "https://www.youtube.com/watch?v=kes2P4IC2bQ",
+        "rights_owner_inquiry": "NPR",
+        "status": "rights_pending",
+        "rights_verified": false
+      },
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-19",
+      "time_local": "16:00",
+      "timezone": "America/New_York",
+      "candidate": {
+        "artist": "Juvenile",
+        "song": "Back That Azz Up",
+        "category": "rap",
+        "source_type": "NPR Tiny Desk live set",
+        "source_url": "https://www.youtube.com/watch?v=kes2P4IC2bQ",
+        "rights_owner_inquiry": "NPR",
+        "status": "rights_pending",
+        "rights_verified": false
+      },
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-19",
+      "time_local": "19:00",
+      "timezone": "America/New_York",
+      "candidate": {
+        "artist": "Anderson .Paak & The Free Nationals",
+        "song": "Come Down",
+        "category": "rnb",
+        "source_type": "NPR Tiny Desk live set",
+        "source_url": "https://www.youtube.com/watch?v=ferZnZ0_rSM",
+        "rights_owner_inquiry": "NPR",
+        "status": "rights_pending",
+        "rights_verified": false
+      },
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-20",
+      "time_local": "10:00",
+      "timezone": "America/New_York",
+      "candidate": {
+        "artist": "Anderson .Paak & The Free Nationals",
+        "song": "Heart Don't Stand A Chance",
+        "category": "rnb",
+        "source_type": "NPR Tiny Desk live set",
+        "source_url": "https://www.youtube.com/watch?v=ferZnZ0_rSM",
+        "rights_owner_inquiry": "NPR",
+        "status": "rights_pending",
+        "rights_verified": false
+      },
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-20",
+      "time_local": "16:00",
+      "timezone": "America/New_York",
+      "candidate": {
+        "artist": "Anderson .Paak & The Free Nationals",
+        "song": "Put Me Thru",
+        "category": "rnb",
+        "source_type": "NPR Tiny Desk live set",
+        "source_url": "https://www.youtube.com/watch?v=ferZnZ0_rSM",
+        "rights_owner_inquiry": "NPR",
+        "status": "rights_pending",
+        "rights_verified": false
+      },
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-20",
+      "time_local": "19:00",
+      "timezone": "America/New_York",
+      "candidate": {
+        "artist": "Anderson .Paak & The Free Nationals",
+        "song": "Suede",
+        "category": "rnb",
+        "source_type": "NPR Tiny Desk live set",
+        "source_url": "https://www.youtube.com/watch?v=ferZnZ0_rSM",
+        "rights_owner_inquiry": "NPR",
+        "status": "rights_pending",
+        "rights_verified": false
+      },
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-21",
+      "time_local": "10:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-21",
+      "time_local": "16:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-21",
+      "time_local": "19:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-22",
+      "time_local": "10:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-22",
+      "time_local": "16:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-22",
+      "time_local": "19:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-23",
+      "time_local": "10:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-23",
+      "time_local": "16:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-23",
+      "time_local": "19:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-24",
+      "time_local": "10:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-24",
+      "time_local": "16:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-24",
+      "time_local": "19:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-25",
+      "time_local": "10:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-25",
+      "time_local": "16:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-25",
+      "time_local": "19:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-26",
+      "time_local": "10:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-26",
+      "time_local": "16:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-26",
+      "time_local": "19:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-27",
+      "time_local": "10:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-27",
+      "time_local": "16:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-27",
+      "time_local": "19:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-28",
+      "time_local": "10:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-28",
+      "time_local": "16:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-28",
+      "time_local": "19:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-29",
+      "time_local": "10:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-29",
+      "time_local": "16:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-29",
+      "time_local": "19:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-30",
+      "time_local": "10:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-30",
+      "time_local": "16:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-11-30",
+      "time_local": "19:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-12-01",
+      "time_local": "10:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-12-01",
+      "time_local": "16:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-12-01",
+      "time_local": "19:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-12-02",
+      "time_local": "10:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-12-02",
+      "time_local": "16:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-12-02",
+      "time_local": "19:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-12-03",
+      "time_local": "10:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-12-03",
+      "time_local": "16:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-12-03",
+      "time_local": "19:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-12-04",
+      "time_local": "10:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-12-04",
+      "time_local": "16:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-12-04",
+      "time_local": "19:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-12-05",
+      "time_local": "10:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-12-05",
+      "time_local": "16:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-12-05",
+      "time_local": "19:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-12-06",
+      "time_local": "10:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-12-06",
+      "time_local": "16:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-12-06",
+      "time_local": "19:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-12-07",
+      "time_local": "10:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-12-07",
+      "time_local": "16:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-12-07",
+      "time_local": "19:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-12-08",
+      "time_local": "10:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-12-08",
+      "time_local": "16:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    },
+    {
+      "date": "2026-12-08",
+      "time_local": "19:00",
+      "timezone": "America/New_York",
+      "candidate": null,
+      "status": "tentative_not_scheduled",
+      "publish_allowed": false
+    }
+  ],
+  "candidates_count": 36,
+  "open_slots": 54,
+  "outreach": [
+    {
+      "recipient": "CMApress@cmaworld.com",
+      "message_id": "1a1b9c073588978e",
+      "purpose": "batch CMA performances"
+    },
+    {
+      "recipient": "permissions@npr.org",
+      "message_id": "1a1b9c06cb6fd1a8",
+      "purpose": "batch NPR Tiny Desk performances"
+    }
+  ]
+}
