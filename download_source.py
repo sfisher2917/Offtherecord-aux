@@ -38,6 +38,9 @@ def main():
     cmd = [
         sys.executable, "-m", "yt_dlp",
         "--no-playlist", "--no-warnings", "--no-progress",
+        "--retries", "4", "--fragment-retries", "4",
+        "--retry-sleep", "http:exp=1:8",
+        "--socket-timeout", "30",
         "--max-filesize", "500M",
         "--match-filter", "duration <= 3600 | duration = NA",
         "--format", "bv*[height<=1080]+ba/b[height<=1080]/b",
