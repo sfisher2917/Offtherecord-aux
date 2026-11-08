@@ -18,7 +18,10 @@ def main():
  if os.getenv("HF_INSPECT_API")=="1":
   print(client.view_api());return
  if not endpoint:
-  sys.exit("Set HF_MUSIC_ENDPOINT after inspecting the Space API.")
+  print("API endpoint not configured. Available API schema:")
+  print(client.view_api())
+  print("Set HF_MUSIC_ENDPOINT and HF_MUSIC_INPUTS_JSON after reviewing the schema.")
+  return
  song=json.loads(pathlib.Path(a.song).read_text())
  # Explicit mapping is required because community Spaces have varying input signatures.
  # Configure HF_MUSIC_INPUTS_JSON as JSON list of supported input keys in positional order.
