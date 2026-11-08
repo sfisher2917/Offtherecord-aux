@@ -7,6 +7,7 @@ import ipaddress
 import socket
 import subprocess
 import sys
+import urllib.request
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -33,36 +34,55 @@ def main():
     parsed = validate_url(args.url)
     dest = Path(args.output)
     dest.parent.mkdir(parents=True, exist_ok=True)
-    # yt-dlp handles direct MP4/WebM URLs and compatible public video pages.
-    # Limit size and duration; never request private sessions or bypass DRM.
-    cmd = [
-        sys.executable, "-m", "yt_dlp",
-        "--no-playlist", "--no-warnings", "--no-progress",
-        "--retries", "4", "--fragment-retries", "4",
-        "--retry-sleep", "http:exp=1:8",
-        "--socket-timeout", "30",
-        "--max-filesize", "500M",
-        "--match-filter", "duration <= 3600 | duration = NA",
-        "--format", "bv*[height<=1080]+ba/b[height<=1080]/b",
-        "--merge-output-format", "mp4",
-        "--recode-video", "mp4",
-        "--output", str(dest.with_suffix("")) + ".%(ext)s",
-        args.url,
-    ]
-    completed = subprocess.run(cmd, capture_output=True, text=True, timeout=600)
-    if completed.returncode:
-        message = (completed.stderr + "\n" + completed.stdout).lower()
-        if "sign in to confirm" in message or "not a bot" in message:
+    # For direct media URLs, use a bounded HTTPS transfer instead of yt-dlp's
+    # extractor. This avoids silent extractor skips and preserves clear HTTP errors.
+    if parsed.path.lower().endswith((".webm", ".mp4", ".mov", ".mkv")):
+        raw = dest.with_suffix(Path(parsed.path).suffix.lower())
+        request = urllib.request.Request(args.url, headers={"User-Agent": "OffTheRecordAux-TechnicalTest/1.0 (public media download)"})
+        with urllib.request.urlopen(request, timeout=45) as response, raw.open("wb") as out:
+            size = 0
+            while True:
+                chunk = response.read(1024 * 1024)
+                if not chunk:
+                    break
+                size += len(chunk)
+                if size > MAX_BYTES:
+                    raise RuntimeError("Source exceeds 500MB download limit")
+                out.write(chunk)
+        if size < 1024:
+            raise RuntimeError("Direct media download returned an empty or invalid file")
+        print(f"Direct HTTPS source downloaded: {size} bytes", flush=True)
+    else:
+        # yt-dlp handles direct MP4/WebM URLs and compatible public video pages.
+        # Limit size and duration; never request private sessions or bypass DRM.
+        cmd = [
+            sys.executable, "-m", "yt_dlp",
+            "--no-playlist", "--no-warnings", "--no-progress",
+            "--retries", "4", "--fragment-retries", "4",
+            "--retry-sleep", "http:exp=1:8",
+            "--socket-timeout", "30",
+            "--max-filesize", "500M",
+            "--match-filter", "duration <= 3600 | duration = NA",
+            "--format", "bv*[height<=1080]+ba/b[height<=1080]/b",
+            "--merge-output-format", "mp4",
+            "--recode-video", "mp4",
+            "--output", str(dest.with_suffix("")) + ".%(ext)s",
+            args.url,
+        ]
+        completed = subprocess.run(cmd, capture_output=True, text=True, timeout=600)
+        if completed.returncode:
+            message = (completed.stderr + "\n" + completed.stdout).lower()
+            if "sign in to confirm" in message or "not a bot" in message:
+                raise SystemExit(
+                    "::error title=YouTube source access blocked::"
+                    "YouTube requires sign-in/bot verification on this runner. "
+                    "Supply a rights-holder-provided direct HTTPS MP4 URL and rerun. "
+                    "No cookies or access-control bypass will be attempted."
+                )
             raise SystemExit(
-                "::error title=YouTube source access blocked::"
-                "YouTube requires sign-in/bot verification on this runner. "
-                "Supply a rights-holder-provided direct HTTPS MP4 URL and rerun. "
-                "No cookies or access-control bypass will be attempted."
+                f"::error title=Source download failed::yt-dlp exit code {completed.returncode}. "
+                "Check the URL is publicly downloadable.\n" + completed.stderr[-3000:]
             )
-        raise SystemExit(
-            f"::error title=Source download failed::yt-dlp exit code {completed.returncode}. "
-            "Check the URL is publicly downloadable.\n" + completed.stderr[-3000:]
-        )
     # yt-dlp can preserve the original container/extension for direct media URLs.
     # Discover the actual downloaded file instead of assuming an MP4 was created.
     candidates = [
@@ -70,7 +90,7 @@ def main():
         if item.is_file() and item.suffix.lower() in (".mp4", ".webm", ".mkv", ".mov")
     ]
     if not candidates:
-        raise RuntimeError("No downloadable media file found; check source URL and yt-dlp output")
+        raise RuntimeError("No downloadable media file found; yt-dlp stdout: " + completed.stdout[-1500:] + " stderr: " + completed.stderr[-1500:] if "completed" in locals() else "Direct source did not produce a media file")
     candidate = max(candidates, key=lambda item: item.stat().st_size)
     if candidate.stat().st_size > MAX_BYTES or candidate.stat().st_size < 1024:
         raise RuntimeError("Downloaded media exceeds 500MB or is unexpectedly small")
