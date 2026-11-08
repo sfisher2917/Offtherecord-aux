@@ -18,6 +18,25 @@ jobs:
             echo "::error::ACE-Step AI music engine is not connected. Configure repository secret ACESTEP_API_URL to an ACE-Step server you operate or are authorized to use. GitHub-hosted runners do not include a music-generation GPU."
             exit 1
           fi
+      - name: Verify ACE-Step service health
+        run: |
+          python3 - <<'PY'
+          import os,urllib.request,json,sys
+          url=os.environ["ACESTEP_API_URL"].rstrip("/")
+          if not url.startswith("https://"):
+              sys.exit("::error::ACESTEP_API_URL must use HTTPS")
+          headers={}
+          if os.environ.get("ACESTEP_API_KEY"):
+              headers["Authorization"]="Bearer "+os.environ["ACESTEP_API_KEY"]
+          try:
+              with urllib.request.urlopen(urllib.request.Request(url+"/health",headers=headers),timeout=20) as response:
+                  data=json.load(response)
+              if data.get("code")!=200:
+                  raise RuntimeError(str(data))
+              print("ACE-Step engine is online.")
+          except Exception as exc:
+              sys.exit("::error::Cannot reach ACE-Step music engine: "+str(exc))
+          PY
       - name: Install FFmpeg
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
       - name: Generate 59-second song with male vocals and instrumental
