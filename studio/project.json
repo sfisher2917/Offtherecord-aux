@@ -1,0 +1,45 @@
+{
+  "title": "No Sleep, All Gas",
+  "artist": "OffTheRecord.aux",
+  "location": "Original studio production",
+  "song_url": "",
+  "rights_confirmed": false,
+  "scenes": [
+    {
+      "start": 0,
+      "end": 8,
+      "lyric": "Three in the morning, got a dream I can't shake",
+      "video_url": ""
+    },
+    {
+      "start": 8,
+      "end": 17,
+      "lyric": "Had to lose a little sleep just to find my way",
+      "video_url": ""
+    },
+    {
+      "start": 17,
+      "end": 29,
+      "lyric": "No sleep, all gas, I ain't looking back",
+      "video_url": ""
+    },
+    {
+      "start": 29,
+      "end": 40,
+      "lyric": "They ain't see the nights when the lights went low",
+      "video_url": ""
+    },
+    {
+      "start": 40,
+      "end": 51,
+      "lyric": "Now the whole damn city singing every word",
+      "video_url": ""
+    },
+    {
+      "start": 51,
+      "end": 59,
+      "lyric": "No sleep, all gas",
+      "video_url": ""
+    }
+  ]
+}
