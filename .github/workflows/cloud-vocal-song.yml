@@ -14,9 +14,7 @@ jobs:
     timeout-minutes: 45
     env:
       HF_MUSIC_SPACE: ${{ secrets.HF_MUSIC_SPACE || 'ACE-Step/Ace-Step-v1.5' }}
-      HF_MUSIC_ENDPOINT: ${{ secrets.HF_MUSIC_ENDPOINT }}
-      HF_MUSIC_INPUTS_JSON: ${{ secrets.HF_MUSIC_INPUTS_JSON }}
-      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+                  HF_TOKEN: ${{ secrets.HF_TOKEN }}
       HF_INSPECT_API: ${{ inputs.inspect_api_only && '1' || '0' }}
     steps:
       - uses: actions/checkout@v4
@@ -27,7 +25,7 @@ jobs:
       - name: Generate via free-quota cloud Space
         run: python3 studio/generate_hf_song.py --song studio/song.json --out offtherecord-original-vocals-59s.mp3
       - name: Upload audio
-        if: ${{ !inputs.inspect_api_only && env.HF_MUSIC_ENDPOINT != '' }}
+        if: ${{ !inputs.inspect_api_only }}
         uses: actions/upload-artifact@v4
         with:
           name: offtherecord-cloud-vocals-59s
