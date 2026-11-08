@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     env:
-      HF_MUSIC_SPACE: ${{ secrets.HF_MUSIC_SPACE }}
+      HF_MUSIC_SPACE: ${{ secrets.HF_MUSIC_SPACE || 'ACE-Step/Ace-Step-v1.5' }}
       HF_MUSIC_ENDPOINT: ${{ secrets.HF_MUSIC_ENDPOINT }}
       HF_MUSIC_INPUTS_JSON: ${{ secrets.HF_MUSIC_INPUTS_JSON }}
       HF_TOKEN: ${{ secrets.HF_TOKEN }}
