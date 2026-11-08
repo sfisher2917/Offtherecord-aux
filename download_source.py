@@ -46,7 +46,20 @@ def main():
         "--output", str(dest.with_suffix("")) + ".%(ext)s",
         args.url,
     ]
-    subprocess.run(cmd, check=True, timeout=600)
+    completed = subprocess.run(cmd, capture_output=True, text=True, timeout=600)
+    if completed.returncode:
+        message = (completed.stderr + "\n" + completed.stdout).lower()
+        if "sign in to confirm" in message or "not a bot" in message:
+            raise SystemExit(
+                "::error title=YouTube source access blocked::"
+                "YouTube requires sign-in/bot verification on this runner. "
+                "Supply a rights-holder-provided direct HTTPS MP4 URL and rerun. "
+                "No cookies or access-control bypass will be attempted."
+            )
+        raise SystemExit(
+            f"::error title=Source download failed::yt-dlp exit code {completed.returncode}. "
+            "Check the URL is publicly downloadable.\n" + completed.stderr[-3000:]
+        )
     result = dest.with_suffix(".mp4")
     if not result.is_file() or result.stat().st_size > MAX_BYTES:
         raise RuntimeError("Expected MP4 not found or exceeds size limit")
