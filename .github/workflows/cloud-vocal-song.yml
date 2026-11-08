@@ -27,7 +27,7 @@ jobs:
       - name: Generate via free-quota cloud Space
         run: python3 studio/generate_hf_song.py --song studio/song.json --out offtherecord-original-vocals-59s.mp3
       - name: Upload audio
-        if: ${{ !inputs.inspect_api_only }}
+        if: ${{ !inputs.inspect_api_only && env.HF_MUSIC_ENDPOINT != '' }}
         uses: actions/upload-artifact@v4
         with:
           name: offtherecord-cloud-vocals-59s
