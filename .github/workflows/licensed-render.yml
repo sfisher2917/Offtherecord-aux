@@ -1,0 +1,47 @@
+name: Licensed content render (artifact only)
+on:
+  workflow_dispatch:
+    inputs:
+      content_id:
+        description: 'Exact content ID in automation/queue.json with documented rights'
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: licensed-render-${{ inputs.content_id }}
+  cancel-in-progress: false
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate license manifest before downloading
+        env:
+          CONTENT_ID: ${{ inputs.content_id }}
+        run: python automation/prepare_render.py --id "$CONTENT_ID"
+      - name: Install rendering dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          python -m pip install -r requirements.txt
+      - name: Download and render authorized footage
+        run: |
+          python - <<'PY'
+          import json,subprocess,sys
+          item=json.load(open("render-metadata.json"))
+          subprocess.run([sys.executable,"download_source.py","--url",item["source_url"],"--output","source-video.mp4"],check=True)
+          subprocess.run([sys.executable,"render.py","--source","source-video.mp4",
+              "--artist",item["artist"],"--title",item["title"],"--event",item["event"],
+              "--start",str(item["start_seconds"]),"--duration",str(item["duration_seconds"])],check=True)
+          PY
+      - name: Upload reviewable artifact and audit manifest
+        uses: actions/upload-artifact@v4
+        with:
+          name: licensed-render-${{ github.run_id }}
+          path: |
+            output/offtherecord-short.mp4
+            render-metadata.json
+          retention-days: 7
+          if-no-files-found: error
