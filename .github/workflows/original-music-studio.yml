@@ -4,40 +4,15 @@ on:
 permissions:
   contents: read
 jobs:
-  validate:
-    runs-on: ubuntu-latest
-    outputs:
-      ready: ${{ steps.check.outputs.ready }}
-    steps:
-      - uses: actions/checkout@v4
-      - id: check
-        name: Check media and rights
-        run: |
-          python3 - <<'PY'
-          import json,os
-          p=json.load(open("studio/project.json"))
-          problems=[]
-          if p.get("rights_confirmed") is not True: problems.append("Confirm rights before setting rights_confirmed to true")
-          if not p.get("song_url"): problems.append("Add a direct HTTPS song_url")
-          if not p.get("scenes") or any(not s.get("video_url") for s in p.get("scenes",[])): problems.append("Add direct HTTPS video_url for every scene")
-          ready=not problems
-          with open(os.environ["GITHUB_OUTPUT"],"a") as f: f.write("ready="+str(ready).lower()+"\n")
-          if problems:
-              print("::notice title=Studio awaiting media::No render attempted because project.json is still a template.")
-              for issue in problems: print("::notice::"+issue)
-          else: print("All required media references and rights declaration are present.")
-          PY
-  render:
-    needs: validate
-    if: ${{ needs.validate.outputs.ready == 'true' }}
+  generate:
     runs-on: ubuntu-latest
     timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
       - name: Install FFmpeg
         run: sudo apt-get update && sudo apt-get install -y ffmpeg fonts-dejavu-core
-      - name: Render
-        run: python3 studio/render.py --project studio/project.json --out offtherecord-original-59s.mp4
+      - name: Generate original instrumental and lyric animation
+        run: python3 studio/generate_original.py --out offtherecord-original-59s.mp4
       - name: Upload MP4
         uses: actions/upload-artifact@v4
         with:
