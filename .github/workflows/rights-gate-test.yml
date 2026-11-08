@@ -1,0 +1,21 @@
+name: Rights gate validation
+on:
+  push:
+    paths:
+      - 'automation/rights_gate.py'
+      - 'automation/dispatch.py'
+      - 'automation/test_rights_gate.py'
+      - '.github/workflows/direct-publish.yml'
+      - '.github/workflows/rights-gate-test.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  rights-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test licensing gate
+        run: python -m unittest discover -s automation -p 'test_*.py' -v
+      - name: Verify existing queue remains held
+        run: python automation/dispatch.py
