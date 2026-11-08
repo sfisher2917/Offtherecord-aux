@@ -2,6 +2,10 @@ name: Direct platform publishing (manual gated)
 on:
   workflow_dispatch:
     inputs:
+      content_id:
+        description: 'Exact licensed content ID in automation/queue.json'
+        required: true
+        type: string
       media_url:
         description: 'Public direct HTTPS MP4 source for GitHub runner; Instagram must access it too'
         required: true
@@ -65,6 +69,26 @@ jobs:
               f.write(b)
           PY
           ffprobe -v error -show_entries stream=codec_type -of csv=p=0 source.mp4
+      - name: Verify documented licensing and exact approved source
+        env:
+          CONTENT_ID: ${{ inputs.content_id }}
+          SOURCE_URL: ${{ inputs.media_url }}
+          TARGET_PLATFORM: ${{ inputs.platform }}
+        run: |
+          python - <<'PY'
+          import json,os,sys
+          sys.path.insert(0,"automation")
+          from rights_gate import validate
+          items=json.load(open("automation/queue.json"))["items"]
+          selected=[x for x in items if x.get("id")==os.environ["CONTENT_ID"]]
+          if len(selected)!=1:raise SystemExit("Licensed queue item not found or duplicated")
+          item=selected[0]
+          errors=validate(item,os.environ["TARGET_PLATFORM"])
+          if item.get("video_url")!=os.environ["SOURCE_URL"]:
+              errors.append("media URL differs from documented approved final video")
+          if errors:raise SystemExit("Rights gate BLOCKED: "+"; ".join(errors))
+          print("Documented rights gate passed; external evidence must be independently verified before marking ready")
+          PY
       - name: Publish via official API
         env:
           ENABLE_LIVE_PUBLISH: ${{ vars.ENABLE_LIVE_PUBLISH }}
