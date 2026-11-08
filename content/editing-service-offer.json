@@ -1,0 +1,13 @@
+{
+  "offer_id": "otr-three-short-form-edits",
+  "title": "OffTheRecord.aux — 3 Short-Form Video Edits",
+  "price_usd": 75,
+  "description": "Three vertical short-form videos up to 60 seconds each, using client-owned or properly licensed source footage; 1080p export, basic captions, edits, branding and audio enhancement, and one revision round.",
+  "payment_provider": "PayPal Business",
+  "payment_link": "https://www.paypal.com/ncp/payment/MNFUABZ6YCQVL",
+  "payment_link_status": "provided_by_owner_not_independently_verified",
+  "fulfillment_status": "manual_review_required_end_to_end_not_tested",
+  "payment_confirmation": "manual_or_verified_provider_confirmation_only",
+  "auto_fulfill": false,
+  "notes": "Do not assume a visit to payment link proves payment or order details. Require client rights confirmation, source footage, brief, and confirmed payment before starting. Do not claim unattended PayPal integration."
+}
