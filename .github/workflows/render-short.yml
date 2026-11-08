@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       source_url:
-        description: 'Public HTTPS video link (YouTube or direct MP4/WebM)'
+        description: 'Direct public HTTPS MP4/WebM URL preferred; YouTube may block cloud runners'
         required: true
         type: string
       artist:
