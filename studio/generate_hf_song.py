@@ -9,14 +9,16 @@ def main():
  p.add_argument("--song",default="studio/song.json")
  p.add_argument("--out",default="offtherecord-original-vocals-59s.mp3")
  a=p.parse_args()
- space=os.getenv("HF_MUSIC_SPACE","").strip()
+ space=os.getenv("HF_MUSIC_SPACE","ACE-Step/Ace-Step-v1.5").strip()
  endpoint=os.getenv("HF_MUSIC_ENDPOINT","").strip()
- if not space or not endpoint:
+ if not space:
   sys.exit("Set HF_MUSIC_SPACE and HF_MUSIC_ENDPOINT repository secrets after inspecting the selected Space's 'Use via API' page.")
  token=os.getenv("HF_TOKEN") or None
  client=Client(space,token=token)
  if os.getenv("HF_INSPECT_API")=="1":
   print(client.view_api());return
+ if not endpoint:
+  sys.exit("Set HF_MUSIC_ENDPOINT after inspecting the Space API.")
  song=json.loads(pathlib.Path(a.song).read_text())
  # Explicit mapping is required because community Spaces have varying input signatures.
  # Configure HF_MUSIC_INPUTS_JSON as JSON list of supported input keys in positional order.
