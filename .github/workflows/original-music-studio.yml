@@ -6,27 +6,41 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    outputs:
+      ready: ${{ steps.check.outputs.ready }}
     steps:
       - uses: actions/checkout@v4
-      - name: Validate project readiness
+      - id: check
+        name: Check media and rights
         run: |
           python3 - <<'PY'
-          import json,sys
+          import json,os
           p=json.load(open("studio/project.json"))
           problems=[]
-          if p.get("rights_confirmed") is not True: problems.append("rights_confirmed must be true only after verifying rights to all media")
-          if not p.get("song_url"): problems.append("song_url is missing")
-          if not p.get("scenes") or any(not s.get("video_url") for s in p.get("scenes",[])): problems.append("one or more scene video_url fields are missing")
+          if p.get("rights_confirmed") is not True: problems.append("Confirm rights before setting rights_confirmed to true")
+          if not p.get("song_url"): problems.append("Add a direct HTTPS song_url")
+          if not p.get("scenes") or any(not s.get("video_url") for s in p.get("scenes",[])): problems.append("Add direct HTTPS video_url for every scene")
+          ready=not problems
+          with open(os.environ["GITHUB_OUTPUT"],"a") as f: f.write("ready="+str(ready).lower()+"\n")
           if problems:
-              print("::notice title=Studio waiting for media::This is a project template, not a ready-to-render music video.")
+              print("::notice title=Studio awaiting media::No render attempted because project.json is still a template.")
               for issue in problems: print("::notice::"+issue)
-              print("Edit studio/project.json with licensed media before running the production workflow.")
-              sys.exit(0)
-          print("Project inputs are present; production rendering can proceed.")
+          else: print("All required media references and rights declaration are present.")
           PY
   render:
-    runs-on: ubuntu-latest
     needs: validate
-    if: ${{ false }}
+    if: ${{ needs.validate.outputs.ready == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
     steps:
-      - run: echo "Use the ready-to-render workflow once project media has been supplied."
+      - uses: actions/checkout@v4
+      - name: Install FFmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg fonts-dejavu-core
+      - name: Render
+        run: python3 studio/render.py --project studio/project.json --out offtherecord-original-59s.mp4
+      - name: Upload MP4
+        uses: actions/upload-artifact@v4
+        with:
+          name: offtherecord-original-music-video
+          path: offtherecord-original-59s.mp4
+          retention-days: 7
