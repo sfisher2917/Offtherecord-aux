@@ -21,6 +21,42 @@
       "notes": "Editorial selection and rights-holder permission asserted by user. Source is a YouTube watch URL, not a direct MP4. Rendering and publishing not yet possible until usable media is obtained.",
       "rights_status": "user_attests_rights_holder_permission",
       "rights_attestation": "User states they have approval to redistribute the recording on Instagram and YouTube; documentary evidence not supplied."
+    },
+    {
+      "id": "us-marine-band-star-spangled-banner-2012-pd",
+      "artist": "The President's Own U.S. Marine Band",
+      "title": "The Star-Spangled Banner",
+      "event": "Schlesinger Concert Hall, Alexandria, Virginia (2012)",
+      "source_url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/The_National_Anthem%2C_The_Star_Spangled_Banner_-_%22The_President%27s_Own%22_U.S._Marine_Band.webm",
+      "status": "ready",
+      "platforms": [
+        "instagram",
+        "youtube"
+      ],
+      "start_seconds": 0,
+      "duration_seconds": 59,
+      "scheduled_local": null,
+      "video_url": null,
+      "do_not_repost": false,
+      "rights": {
+        "verification": "documented",
+        "licensor": "United States Marine Band / U.S. federal government public-domain work",
+        "license_id": "PD-USGOV-MARINE-BAND-2012-STAR-SPANGLED-BANNER",
+        "evidence_url": "https://commons.wikimedia.org/wiki/File:The_National_Anthem,_The_Star_Spangled_Banner_-_%22The_President%27s_Own%22_U.S._Marine_Band.webm",
+        "commercial_use": true,
+        "editing": true,
+        "audio": true,
+        "video": true,
+        "redistribution": true,
+        "platforms": [
+          "instagram",
+          "youtube"
+        ],
+        "expires_on": "2099-12-31"
+      },
+      "caption": "A powerful rendition of The Star-Spangled Banner by The President’s Own United States Marine Band. 🇺🇸 Public-domain U.S. government performance. Source: Wikimedia Commons. #MarineBand #NationalAnthem #LiveMusic #OffTheRecord",
+      "youtube_title": "U.S. Marine Band — The Star-Spangled Banner 🇺🇸 #Shorts",
+      "notes": "Public-domain composition and U.S. Marine Band federal employee performance documented by Wikimedia Commons file page. Intended U.S. rights analysis; platform policies, trademarks, and territorial differences still require review. Candidate for internal render first; DO NOT auto-publish. Source download URL needs runner verification."
     }
   ]
 }
