@@ -63,7 +63,7 @@
       "status": "research",
       "artist": "Chris Stapleton",
       "title": "Tennessee Whiskey",
-      "event": "Live performance — source not yet selected",
+      "event": "49th CMA Awards, Nashville, November 4, 2015",
       "source_url": null,
       "platforms": [
         "instagram",
@@ -85,7 +85,14 @@
         "platforms": [],
         "expires_on": null
       },
-      "notes": "Mainstream country/R&B crossover discovery candidate only. Do not render or publish until verified rights holder permission for composition, master/performance audio and video footage; no approved source URL."
+      "notes": "Confirmed live CMA Awards performance with Justin Timberlake, officially uploaded by CMA on 2026-09-01. Discovery links only; no permission to download, modify, or repost established. Source_url remains null; status research; do_not_repost true. Song publishing rights separately implicated.",
+      "discovery_url": "https://www.youtube.com/watch?v=N34fUhOU6dc",
+      "alternate_official_url": "https://www.youtube.com/watch?v=3Nl2rdaddKw",
+      "rights_contacts": [
+        "Country Music Association / broadcast footage rights",
+        "Song publishers for Tennessee Whiskey",
+        "Relevant live recording and performer rights holders"
+      ]
     }
   ]
 }
