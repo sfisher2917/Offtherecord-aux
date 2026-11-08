@@ -1,5 +1,33 @@
 {
   "schema_version": 1,
-  "entries": [],
-  "notes": "Only add sources after verifying permission for video and underlying audio. Store source URL, rights evidence URL, performer, title, source fingerprint, first used date and published platform URLs."
+  "entries": [
+    {
+      "id": "cody-johnson-carin-leon-she-hurts-like-tequila-live",
+      "artist": "Cody Johnson × Carín León",
+      "title": "She Hurts Like Tequila (Live)",
+      "rights_status": "unverified",
+      "source_url": null,
+      "rights_evidence_url": null,
+      "published": [
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/reel/Dfdd0I7kzvk/",
+          "date": "2026-11-07"
+        },
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/shorts/1mNGKLQYjPQ",
+          "date": "2026-11-07"
+        },
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/shorts/9W2ViYKEIwY",
+          "date": "2026-11-07",
+          "note": "duplicate YouTube publication"
+        }
+      ],
+      "do_not_repost": true
+    }
+  ],
+  "notes": "Published status was checked in Metricool. Publication is not evidence of licensing. Require independent rights verification for any future reuse."
 }
