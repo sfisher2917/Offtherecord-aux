@@ -1,0 +1,89 @@
+name: Direct platform publishing (manual gated)
+on:
+  workflow_dispatch:
+    inputs:
+      media_url:
+        description: 'Public direct HTTPS MP4 source for GitHub runner; Instagram must access it too'
+        required: true
+        type: string
+      platform:
+        description: 'Destination'
+        required: true
+        type: choice
+        options:
+          - youtube
+          - instagram
+      title:
+        description: 'Video title'
+        required: true
+        type: string
+      caption:
+        description: 'Caption and attribution'
+        required: true
+        type: string
+      publish_key:
+        description: 'Unique content/platform key; check prior posts before running'
+        required: true
+        type: string
+      rights_confirmed:
+        description: 'I confirm I have permission to redistribute both footage and audio'
+        required: true
+        type: boolean
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: publish-${{ inputs.publish_key }}-${{ inputs.platform }}
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: ${{ inputs.rights_confirmed }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Dependencies
+        run: |
+          python -m pip install google-api-python-client google-auth google-auth-httplib2
+      - name: Fetch video file
+        env:
+          SOURCE_URL: ${{ inputs.media_url }}
+        run: |
+          python - <<'PY'
+          import os,urllib.parse,urllib.request
+          url=os.environ["SOURCE_URL"]
+          p=urllib.parse.urlsplit(url)
+          if p.scheme!="https" or not p.hostname:raise SystemExit("HTTPS media required")
+          req=urllib.request.Request(url,headers={"User-Agent":"OffTheRecord-aux/1.0"})
+          with urllib.request.urlopen(req,timeout=60) as r,open("source.mp4","wb") as f:
+            n=0
+            while True:
+              b=r.read(1024*1024)
+              if not b:break
+              n+=len(b)
+              if n>500*1024*1024:raise SystemExit("Video exceeds 500 MB")
+              f.write(b)
+          PY
+          ffprobe -v error -show_entries stream=codec_type -of csv=p=0 source.mp4
+      - name: Publish via official API
+        env:
+          ENABLE_LIVE_PUBLISH: ${{ vars.ENABLE_LIVE_PUBLISH }}
+          META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
+          INSTAGRAM_ACCOUNT_ID: ${{ secrets.INSTAGRAM_ACCOUNT_ID }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          VIDEO_URL: ${{ inputs.media_url }}
+          TITLE: ${{ inputs.title }}
+          CAPTION: ${{ inputs.caption }}
+          PLATFORM: ${{ inputs.platform }}
+          PUBLISH_KEY: ${{ inputs.publish_key }}
+        run: python automation/publish_job.py --media source.mp4 --title "$TITLE" --caption "$CAPTION" --platform "$PLATFORM" --video-url "$VIDEO_URL" --publish-key "$PUBLISH_KEY"
+      - name: Retain publication result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: publication-result-${{ github.run_id }}
+          path: publication-result.json
+          if-no-files-found: ignore
+          retention-days: 30
