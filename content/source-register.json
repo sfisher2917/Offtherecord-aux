@@ -1,0 +1,5 @@
+{
+  "schema_version": 1,
+  "entries": [],
+  "notes": "Only add sources after verifying permission for video and underlying audio. Store source URL, rights evidence URL, performer, title, source fingerprint, first used date and published platform URLs."
+}
