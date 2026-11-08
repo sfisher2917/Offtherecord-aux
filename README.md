@@ -5,11 +5,11 @@ An initial free GitHub Actions + FFmpeg pipeline for **authorized** music perfor
 ## Render a clip on Android
 1. Open [Actions](https://github.com/sfisher2917/Offtherecord-aux/actions).
 2. Select **Render OffTheRecord Short** and tap **Run workflow**.
-3. Provide a **direct HTTPS MP4/WebM video file URL**, performer, title and duration (maximum 60 seconds).
+3. Provide a **direct HTTPS MP4/WebM video file URL**, verified performer, song title, event/venue, clip start and duration (up to 59.5 seconds).
 4. Confirm reuse rights for **both the recording and the music**.
 5. After a successful run, open its **Artifacts** section and download `offtherecord-short` (ZIP containing an MP4).
 
-The renderer targets **1080 × 1920 H.264 video with AAC audio**, adds OffTheRecord.aux text branding, and checks the output streams and duration.
+The renderer targets **1080 × 1920 H.264 video with AAC audio**, adds OffTheRecord.aux top branding and exactly one bottom information panel containing artist, title and event, applies audio fades, and checks the output streams and duration.
 
 ## Automated test
 The **Smoke test renderer** workflow generates a synthetic test pattern and synthetic audio, renders a short, and uploads a sample artifact. This is only a technical test, not publishable music content.
@@ -22,7 +22,7 @@ The **Smoke test renderer** workflow generates a synthetic test pattern and synt
 - Verify source license and attribution requirements before distributing or publishing.
 
 ## Roadmap
-1. Validate the synthetic smoke-test render and audio.
+1. Run the synthetic smoke-test workflow after each renderer change and verify its MP4 and audio.
 2. Render a genuinely licensed performance.
 3. Establish compatible public hosting for finished MP4s.
 4. Integrate Metricool with idempotent duplicate prevention and independently verified publication.
