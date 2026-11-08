@@ -14,7 +14,7 @@ jobs:
     timeout-minutes: 45
     env:
       HF_MUSIC_SPACE: ${{ secrets.HF_MUSIC_SPACE || 'ACE-Step/Ace-Step-v1.5' }}
-                  HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
       HF_INSPECT_API: ${{ inputs.inspect_api_only && '1' || '0' }}
     steps:
       - uses: actions/checkout@v4
