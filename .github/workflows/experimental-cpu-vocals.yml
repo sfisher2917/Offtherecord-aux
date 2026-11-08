@@ -1,0 +1,47 @@
+name: Experimental ACE-Step CPU Vocal Test
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  cpu-vocals:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - name: Free disk space
+        run: |
+          df -h
+          sudo rm -rf /usr/local/lib/android /opt/hostedtoolcache/CodeQL /usr/share/dotnet
+          df -h
+      - name: Install Python and uv
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+      - name: Fetch ACE-Step open-source inference code
+        run: git clone --depth 1 https://github.com/ace-step/ACE-Step-1.5.git /tmp/ace-step
+      - name: Install model dependencies
+        working-directory: /tmp/ace-step
+        run: uv sync
+      - name: Prepare original lyric test input
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          s=json.loads(pathlib.Path('studio/song.json').read_text())
+          d={'caption':s['prompt'],'lyrics':s['lyrics'],'bpm':s['bpm'],'keyscale':s['key_scale'],'timesignature':'4','language':'en','duration':59,'batch_size':1,'inference_steps':8}
+          pathlib.Path('/tmp/ace-step/examples/text2music/offtherecord_cpu.json').write_text(json.dumps(d))
+          PY
+      - name: Generate original music with CPU only (experimental)
+        working-directory: /tmp/ace-step
+        env:
+          ACESTEP_DEVICE: cpu
+          ACESTEP_CONFIG_PATH: acestep-v15-turbo
+          ACESTEP_INIT_LLM: 'false'
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          uv run python profile_inference.py --device cpu --example offtherecord_cpu.json --duration 59 --inference-steps 8 --no-warmup
+      - name: Save diagnostic logs
+        if: always()
+        run: echo "CPU experiment finished; inspect the preceding logs for performance and generated audio path."
