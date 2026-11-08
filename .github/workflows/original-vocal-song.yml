@@ -1,0 +1,30 @@
+name: Original Vocal Song (ACE-Step)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  generate-vocal-song:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      ACESTEP_API_URL: ${{ secrets.ACESTEP_API_URL }}
+      ACESTEP_API_KEY: ${{ secrets.ACESTEP_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check AI music engine connection
+        run: |
+          if [ -z "$ACESTEP_API_URL" ]; then
+            echo "::error::ACE-Step AI music engine is not connected. Configure repository secret ACESTEP_API_URL to an ACE-Step server you operate or are authorized to use. GitHub-hosted runners do not include a music-generation GPU."
+            exit 1
+          fi
+      - name: Install FFmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - name: Generate 59-second song with male vocals and instrumental
+        run: python3 studio/generate_vocal_song.py --song studio/song.json --out offtherecord-original-vocals-59s.mp3
+      - name: Upload finished vocal song
+        uses: actions/upload-artifact@v4
+        with:
+          name: offtherecord-original-59s-vocals
+          path: offtherecord-original-vocals-59s.mp3
+          retention-days: 7
