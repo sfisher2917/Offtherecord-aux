@@ -63,9 +63,28 @@ def main():
             f"::error title=Source download failed::yt-dlp exit code {completed.returncode}. "
             "Check the URL is publicly downloadable.\n" + completed.stderr[-3000:]
         )
+    # yt-dlp can preserve the original container/extension for direct media URLs.
+    # Discover the actual downloaded file instead of assuming an MP4 was created.
+    candidates = [
+        item for item in dest.parent.glob(dest.stem + ".*")
+        if item.is_file() and item.suffix.lower() in (".mp4", ".webm", ".mkv", ".mov")
+    ]
+    if not candidates:
+        raise RuntimeError("No downloadable media file found; check source URL and yt-dlp output")
+    candidate = max(candidates, key=lambda item: item.stat().st_size)
+    if candidate.stat().st_size > MAX_BYTES or candidate.stat().st_size < 1024:
+        raise RuntimeError("Downloaded media exceeds 500MB or is unexpectedly small")
     result = dest.with_suffix(".mp4")
+    if candidate != result:
+        subprocess.run([
+            "ffmpeg", "-hide_banner", "-loglevel", "error", "-y",
+            "-i", str(candidate), "-map", "0:v:0", "-map", "0:a:0",
+            "-c:v", "libx264", "-preset", "veryfast", "-crf", "21",
+            "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k",
+            "-movflags", "+faststart", str(result)
+        ], check=True, timeout=600)
     if not result.is_file() or result.stat().st_size > MAX_BYTES:
-        raise RuntimeError("Expected MP4 not found or exceeds size limit")
+        raise RuntimeError("Normalized MP4 not found or exceeds size limit")
     probe = subprocess.run(
         ["ffprobe", "-v", "error", "-show_entries",
          "stream=codec_type", "-of", "csv=p=0", str(result)],
