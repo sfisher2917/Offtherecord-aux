@@ -1,0 +1,22 @@
+name: Original Music Video Studio
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install video tools
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg fonts-dejavu-core
+      - name: Validate and render authorized project
+        run: python3 studio/render.py --project studio/project.json --out offtherecord-original-59s.mp4
+      - name: Upload finished MP4
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: offtherecord-original-music-video
+          path: offtherecord-original-59s.mp4
+          retention-days: 7
