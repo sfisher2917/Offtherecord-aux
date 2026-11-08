@@ -1,0 +1,33 @@
+name: Smoke test renderer
+on:
+  push:
+    paths:
+      - '.github/workflows/smoke-test.yml'
+      - 'render.py'
+      - 'requirements.txt'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install FFmpeg and Python dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          python -m pip install -r requirements.txt
+      - name: Generate original test video and audio
+        run: |
+          ffmpeg -hide_banner -loglevel error -y -f lavfi -i "testsrc2=size=540x960:rate=30" -f lavfi -i "sine=frequency=440:sample_rate=48000" -t 4 -c:v libx264 -preset ultrafast -pix_fmt yuv420p -c:a aac -shortest source-test.mp4
+      - name: Render branded short and validate
+        run: |
+          python render.py --source source-test.mp4 --artist "TEST ONLY" --title "Synthetic audio and video" --duration 4
+      - name: Upload downloadable test MP4
+        uses: actions/upload-artifact@v4
+        with:
+          name: offtherecord-smoke-test
+          path: output/offtherecord-short.mp4
+          retention-days: 7
