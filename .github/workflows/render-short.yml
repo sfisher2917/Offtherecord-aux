@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       source_url:
-        description: 'Direct HTTPS MP4 or WebM URL, licensed video AND audio'
+        description: 'Public HTTPS video link (YouTube or direct MP4/WebM)'
         required: true
         type: string
       artist:
@@ -20,7 +20,7 @@ on:
         default: '42'
         type: string
       rights_confirmed:
-        description: 'I verified reuse permission for both footage and audio'
+        description: 'I have rights to reuse both video and audio on intended platforms'
         required: true
         type: boolean
         default: false
@@ -33,36 +33,23 @@ jobs:
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
-      - name: Install FFmpeg and Pillow
+      - name: Install FFmpeg and Python dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y ffmpeg
-          pip install -r requirements.txt
-      - name: Download source
+          python -m pip install -r requirements.txt
+      - name: Download compatible source to MP4
         env:
           SOURCE_URL: ${{ inputs.source_url }}
-        run: |
-          python - <<'PY'
-          import os,urllib.parse,urllib.request
-          u=os.environ["SOURCE_URL"]
-          p=urllib.parse.urlsplit(u)
-          if p.scheme!="https" or not p.hostname:raise SystemExit("Direct HTTPS URL required")
-          with urllib.request.urlopen(urllib.request.Request(u,headers={"User-Agent":"Mozilla/5.0"}),timeout=90) as r,open("source-video","wb") as f:
-            n=0
-            while True:
-              b=r.read(1024*1024)
-              if not b:break
-              n+=len(b)
-              if n>300*1024*1024:raise SystemExit("Source exceeds 300 MB")
-              f.write(b)
-          PY
+        run: python download_source.py --url "$SOURCE_URL" --output source-video.mp4
       - name: Render and verify
         env:
           ARTIST: ${{ inputs.artist }}
           TITLE: ${{ inputs.title }}
           DURATION: ${{ inputs.duration }}
-        run: python render.py --source source-video --artist "$ARTIST" --title "$TITLE" --duration "$DURATION"
-      - uses: actions/upload-artifact@v4
+        run: python render.py --source source-video.mp4 --artist "$ARTIST" --title "$TITLE" --duration "$DURATION"
+      - name: Upload finished MP4
+        uses: actions/upload-artifact@v4
         with:
           name: offtherecord-short
           path: output/offtherecord-short.mp4
