@@ -42,6 +42,27 @@ jobs:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           uv run python profile_inference.py --device cpu --example offtherecord_cpu.json --duration 59 --inference-steps 8 --no-warmup
+      - name: Export 59-second MP3 with short fades
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          python - <<'PY'
+          from pathlib import Path
+          files=list(Path('/tmp').glob('acestep_profile_*/*.flac'))
+          if not files:
+              raise SystemExit('ACE-Step did not leave a generated FLAC file')
+          src=max(files,key=lambda f:f.stat().st_mtime)
+          Path('generated_audio_path.txt').write_text(str(src))
+          print('Generated source:',src,'bytes:',src.stat().st_size)
+          PY
+          ffmpeg -hide_banner -loglevel error -y -i "$(cat generated_audio_path.txt)" -af "apad,atrim=0:59,afade=t=in:st=0:d=1.2,afade=t=out:st=57.8:d=1.2" -t 59 -codec:a libmp3lame -b:a 256k offtherecord-original-vocals-59s.mp3
+          ffprobe -v error -show_entries format=duration,size -of default=noprint_wrappers=1 offtherecord-original-vocals-59s.mp3
+      - name: Upload downloadable song
+        uses: actions/upload-artifact@v4
+        with:
+          name: offtherecord-original-vocals-59s
+          path: offtherecord-original-vocals-59s.mp3
+          if-no-files-found: error
+          retention-days: 30
       - name: Save diagnostic logs
         if: always()
         run: echo "CPU experiment finished; inspect the preceding logs for performance and generated audio path."
