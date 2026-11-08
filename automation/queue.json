@@ -7,7 +7,7 @@
       "artist": "Justin Bieber & benny blanco",
       "title": "Lonely (Official Acoustic Video)",
       "source_url": "https://www.youtube.com/watch?v=Cu5hhxP_prE",
-      "status": "awaiting_licensed_media",
+      "status": "awaiting_media_file",
       "editorial_approved": true,
       "video_url": null,
       "rights_evidence_url": null,
@@ -18,7 +18,9 @@
       ],
       "caption": "Justin Bieber & benny blanco — Lonely (Acoustic). A stripped-back performance that puts the vocals front and center. 🎙️\n\nSource: Justin Bieber & benny blanco official acoustic video.\n\n#JustinBieber #BennyBlanco #Lonely #Acoustic #OffTheRecord",
       "youtube_title": "Justin Bieber & benny blanco — Lonely (Acoustic) #Shorts",
-      "notes": "User selected and editorially approved this YouTube source. Not a direct video file. No confirmed audiovisual reuse license. Do not publish until source media and rights are verified."
+      "notes": "Editorial selection and rights-holder permission asserted by user. Source is a YouTube watch URL, not a direct MP4. Rendering and publishing not yet possible until usable media is obtained.",
+      "rights_status": "user_attests_rights_holder_permission",
+      "rights_attestation": "User states they have approval to redistribute the recording on Instagram and YouTube; documentary evidence not supplied."
     }
   ]
 }
