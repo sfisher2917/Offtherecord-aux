@@ -1,0 +1,31 @@
+name: Licensed-source technical render test
+on:
+  push:
+    paths:
+      - '.github/workflows/source-render-test.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  render-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          python -m pip install -r requirements.txt
+      - name: Download publicly hosted performance for internal technical test only
+        run: |
+          python download_source.py --url 'https://upload.wikimedia.org/wikipedia/commons/5/50/Garth_Brooks_performs_%22Amazing_Grace%22.webm' --output source-video.mp4
+      - name: Render internal sample and verify codecs
+        run: |
+          python render.py --source source-video.mp4 --artist 'Garth Brooks' --title 'Amazing Grace' --event '2021 Presidential Inauguration' --start 0 --duration 59
+      - name: Upload internal test artifact (not cleared for publication)
+        uses: actions/upload-artifact@v4
+        with:
+          name: garth-brooks-technical-render-not-for-publication
+          path: output/offtherecord-short.mp4
+          retention-days: 2
