@@ -1,0 +1,94 @@
+name: Free Unified Clipper
+on:
+  workflow_dispatch:
+    inputs:
+      source_url:
+        description: 'Direct HTTPS URL to a rights-cleared MP4 (not a YouTube watch page)'
+        required: true
+        type: string
+      start:
+        description: 'Start timestamp (seconds), or auto for strongest audio section'
+        default: 'auto'
+        required: true
+      duration:
+        description: 'Clip duration (max 60 seconds)'
+        default: '59'
+        required: true
+      artist:
+        description: 'Artist or creator'
+        required: true
+      song:
+        description: 'Song or clip title'
+        required: true
+      location:
+        description: 'Live performance location'
+        required: true
+      rights_confirmed:
+        description: 'I have permission to edit and distribute this footage'
+        required: true
+        type: boolean
+jobs:
+  clip:
+    if: ${{ inputs.rights_confirmed }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install free tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg fonts-dejavu-core
+      - name: Download input safely
+        env:
+          SOURCE_URL: ${{ inputs.source_url }}
+        run: |
+          python3 - <<'PY'
+          import os,urllib.parse,urllib.request,ipaddress,socket
+          url=os.environ["SOURCE_URL"]
+          p=urllib.parse.urlsplit(url)
+          if p.scheme!="https" or not p.hostname or p.username or p.password: raise SystemExit("Only direct HTTPS URLs allowed")
+          if p.hostname.lower() in {"localhost","metadata.google.internal"}: raise SystemExit("Invalid host")
+          for item in socket.getaddrinfo(p.hostname,443):
+              if not ipaddress.ip_address(item[4][0]).is_global: raise SystemExit("Non-public host denied")
+          class NoRedirect(urllib.request.HTTPRedirectHandler):
+              def redirect_request(self,*a,**kw): raise ValueError("Redirects disabled")
+          req=urllib.request.Request(url,headers={"User-Agent":"OffTheRecord-Clipper/1"})
+          with urllib.request.build_opener(NoRedirect).open(req,timeout=30) as src,open("source.mp4","wb") as out:
+              n=0
+              while True:
+                  chunk=src.read(1024*1024)
+                  if not chunk: break
+                  n+=len(chunk)
+                  if n>300*1024*1024: raise SystemExit("File exceeds 300 MB")
+                  out.write(chunk)
+          PY
+      - name: Select clip automatically when requested
+        env:
+          START_INPUT: ${{ inputs.start }}
+          DURATION_INPUT: ${{ inputs.duration }}
+        run: |
+          if [ "$START_INPUT" = "auto" ]; then
+            python3 tools/auto_select.py source.mp4 --length "$DURATION_INPUT"
+            python3 - <<'PY'
+          import json
+          with open("selection.json") as f: d=json.load(f)
+          with open("selected_start.txt","w") as f: f.write(str(d["start"]))
+          PY
+          else
+            printf '%s' "$START_INPUT" > selected_start.txt
+          fi
+      - name: Render both platform versions
+        env:
+          DURATION: ${{ inputs.duration }}
+          ARTIST: ${{ inputs.artist }}
+          SONG: ${{ inputs.song }}
+          LOCATION: ${{ inputs.location }}
+        run: START="$(cat selected_start.txt)" python3 tools/free_clipper.py
+      - name: Upload finished MP4s
+        uses: actions/upload-artifact@v4
+        with:
+          name: offtherecord-ready-to-upload
+          path: output/*.mp4
+          retention-days: 7
