@@ -7,8 +7,8 @@ on:
         required: true
         type: string
       start:
-        description: 'Start timestamp (seconds)'
-        default: '0'
+        description: 'Start timestamp (seconds), or auto for strongest audio section'
+        default: 'auto'
         required: true
       duration:
         description: 'Clip duration (max 60 seconds)'
@@ -64,14 +64,28 @@ jobs:
                   if n>300*1024*1024: raise SystemExit("File exceeds 300 MB")
                   out.write(chunk)
           PY
+      - name: Select clip automatically when requested
+        env:
+          START_INPUT: ${{ inputs.start }}
+          DURATION_INPUT: ${{ inputs.duration }}
+        run: |
+          if [ "$START_INPUT" = "auto" ]; then
+            python3 tools/auto_select.py source.mp4 --length "$DURATION_INPUT"
+            python3 - <<'PY'
+          import json
+          with open("selection.json") as f: d=json.load(f)
+          with open("selected_start.txt","w") as f: f.write(str(d["start"]))
+          PY
+          else
+            printf '%s' "$START_INPUT" > selected_start.txt
+          fi
       - name: Render both platform versions
         env:
-          START: ${{ inputs.start }}
           DURATION: ${{ inputs.duration }}
           ARTIST: ${{ inputs.artist }}
           SONG: ${{ inputs.song }}
           LOCATION: ${{ inputs.location }}
-        run: python3 tools/free_clipper.py
+        run: START="$(cat selected_start.txt)" python3 tools/free_clipper.py
       - name: Upload finished MP4s
         uses: actions/upload-artifact@v4
         with:
