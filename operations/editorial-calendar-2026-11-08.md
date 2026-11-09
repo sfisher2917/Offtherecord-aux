@@ -1,5 +1,5 @@
 # OffTheRecord.aux — Rolling 30-day editorial candidate calendar
-Updated 2026-11-08. TENTATIVE ONLY: no entry is approved for posting. All times America/New_York. Slots 10:00, 16:00, 19:00. Do not treat categories as identified artists, booked posts, or licensed media.
+Updated 2026-11-09. TENTATIVE ONLY: no entry is approved for posting. All times America/New_York. Slots 10:00, 16:00, 19:00. Do not treat categories as identified artists, booked posts, or licensed media.
 
 ## Rights gate
 Each candidate requires documented permission for master/sound recording, composition/publishing (including synchronization where applicable), audiovisual performance footage, editing/derivatives, commercial redistribution on Instagram and YouTube, territory, term, attribution and monetization. Verify source files and duplicate checks before render/publish.
@@ -12,7 +12,6 @@ Each candidate requires documented permission for master/sound recording, compos
 ## Calendar
 | Date | 10:00 | 16:00 | 19:00 | Rights / publication |
 |---|---|---|---|---|
-| 2026-11-08 | Country — CMA live performance (rights pending) | Hip-hop — NPR Tiny Desk live performance (rights pending) | Rap — independent artist, artist-owned live footage (not sourced) | HOLD — no complete clearance or verified media |
 | 2026-11-09 | R&B — NPR Tiny Desk live performance (rights pending) | Country — independent artist, artist-owned live footage (not sourced) | R&B — independent artist, artist-owned live footage (not sourced) | HOLD — no complete clearance or verified media |
 | 2026-11-10 | Hip-hop — NPR Tiny Desk live performance (rights pending) | Rap — independent artist, artist-owned live footage (not sourced) | Country — CMA live performance (rights pending) | HOLD — no complete clearance or verified media |
 | 2026-11-11 | Country — independent artist, artist-owned live footage (not sourced) | R&B — independent artist, artist-owned live footage (not sourced) | R&B — NPR Tiny Desk live performance (rights pending) | HOLD — no complete clearance or verified media |
@@ -48,3 +47,11 @@ Only contact official public business addresses, one-to-one after duplicate chec
 
 ## Operating status
 No new licenses granted, media approved, scheduled posts or sales verified by this calendar. Existing production pipeline is experimental; inspect failed GitHub Actions before relying on renders.
+| 2026-12-08 | Country — independent artist, artist-owned live footage (not sourced) | Hip-hop — independent artist, artist-owned live footage (not sourced) | R&B — NPR Tiny Desk live performance (rights pending) | HOLD — no complete clearance or verified media |
+
+## November 9 verification and business development
+- Gmail inbox search of NPR, CMA, and Chris Stapleton domains: no replies or written licensing approval found. Four previous outbound inquiries verified, no duplicate inquiry sent.
+- Metricool checked for Nov 8–10: no scheduled or published posts returned. No new licensed media or valid public post URLs confirmed.
+- Sales lead: Apache XLR, Atlanta live music/poetry venue; publicly listed general business email info@apachexlr.com. One tailored $75/three-clip introductory outreach sent November 9, 2026; Gmail message ID 1a1c09d453663a13. Status: contacted, no reply/quote accepted/sale/payment. Only public business contact noted; private customer data and any future replies must be stored outside this public repo.
+- Additional uncontacted prospects for qualification: Red Light Café (country/Americana live shows); Pentagon Studios ATL (podcast/live performance studio). No messages sent to either. Do not confuse prospecting with licensing.
+- Financial status: $0 confirmed collected, $0 incurred, no subscriptions or commitments.
