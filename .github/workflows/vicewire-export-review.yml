@@ -1,0 +1,26 @@
+name: VICEWIRE render and downloadable review
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: vicewire-dry-run
+      - name: Install FFmpeg
+        run: sudo apt-get update -qq && sudo apt-get install -y ffmpeg
+      - name: Generate synthetic demo and validate MP4
+        run: python3 vicewire/demo_test.py --keep-output vicewire/output
+      - name: Upload playable video
+        uses: actions/upload-artifact@v4
+        with:
+          name: vicewire-video-review
+          path: |
+            vicewire/output/*.mp4
+            vicewire/output/*.json
+          if-no-files-found: error
+          retention-days: 30
