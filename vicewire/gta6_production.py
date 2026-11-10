@@ -39,8 +39,8 @@ cues=[]
 for i in range(0,len(words),7):
  start=voice_duration*i/len(words)
  end=voice_duration*min(i+7,len(words))/len(words)
- cues.append(f"{len(cues)+1}\\n{timestamp(start)} --> {timestamp(end)}\\n{' '.join(words[i:i+7])}\\n")
-(ROOT/"captions.srt").write_text("\\n".join(cues),encoding="utf-8")
+ cues.append(f"{len(cues)+1}\n{timestamp(start)} --> {timestamp(end)}\n{' '.join(words[i:i+7])}\n")
+(ROOT/"captions.srt").write_text("\n".join(cues),encoding="utf-8")
 # Build eight varied scene extracts from across the source, retaining original footage.
 segments=8
 clip_length=7.5
