@@ -1,0 +1,34 @@
+name: VICEWIRE GTA6 60-second production
+on:
+  workflow_dispatch:
+    inputs:
+      source_url:
+        description: Authorized YouTube video URL
+        required: true
+        default: https://www.youtube.com/watch?v=tJbzMqJGH4k
+  push:
+    paths:
+      - .github/workflows/vicewire-gta6-production.yml
+jobs:
+  produce:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install production tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          python -m pip install --user yt-dlp edge-tts
+      - name: Fetch authorized source and render 60-second editorial Short
+        env:
+          SOURCE_URL: ${{ github.event.inputs.source_url || 'https://www.youtube.com/watch?v=tJbzMqJGH4k' }}
+        run: python3 vicewire/gta6_production.py
+      - name: Upload manual-posting package
+        uses: actions/upload-artifact@v4
+        with:
+          name: vicewire-gta6-60-second-manual-post
+          path: vicewire/output/
+          if-no-files-found: error
+          retention-days: 30
