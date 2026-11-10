@@ -54,11 +54,12 @@ concat=ROOT/"concat.txt"
 concat.write_text("".join(f"file 'scene_{i:02d}.mp4'\n" for i in range(segments)))
 subprocess.run(["ffmpeg","-hide_banner","-loglevel","error","-y","-f","concat","-safe","0","-i",str(concat),
  "-i",str(ROOT/"voice.mp3"),"-filter_complex",
- "[0:v]drawbox=x=0:y=1600:w=1080:h=230:color=black@0.7:t=fill,drawbox=x=40:y=1620:w=12:h=175:color=red:t=fill,drawtext=text='VICEWIRE | GTA 6':fontcolor=white:fontsize=56:x=80:y=1660[v];[1:a]apad=pad_dur=60,atrim=duration=60,afade=t=out:st=58:d=2[a]",
+ "[0:v]drawbox=x=0:y=1600:w=1080:h=230:color=black@0.7:t=fill,drawbox=x=40:y=1620:w=12:h=175:color=red:t=fill,drawtext=text='VICEWIRE | GTA 6':fontcolor=white:fontsize=56:x=80:y=1660,subtitles=vicewire/output/captions.srt:force_style='Fontsize=20,Alignment=2,MarginV=270,Outline=2'[v];[1:a]apad=pad_dur=60,atrim=duration=60,afade=t=out:st=58:d=2[a]",
  "-map","[v]","-map","[a]","-t","60","-c:v","libx264","-preset","veryfast","-crf","21","-pix_fmt","yuv420p",
  "-c:a","aac","-b:a","192k","-movflags","+faststart",str(ROOT/"VICEWIRE_GTA6_YouTube_Shorts.mp4")],check=True)
 import shutil
 shutil.copyfile(ROOT/"VICEWIRE_GTA6_YouTube_Shorts.mp4",ROOT/"VICEWIRE_GTA6_Instagram_Reel.mp4")
 (ROOT/"POSTING.txt").write_text("YouTube title: Rockstar's GTA 6 World Looks INSANE | VICEWIRE #Shorts\nInstagram caption: Vice City is calling. Here's our GTA 6 breakdown. #GTA6 #ViceCity #RockstarGames #VICEWIRE\nSource: "+SOURCE+"\nNOTE: Voiceover is AI-generated. Review visual accuracy, pacing and rights before uploading.\n")
 # Do not redistribute the full-length source video in the deliverable.
-src.unlink()\nfor clip in ROOT.glob("scene_*.mp4"): clip.unlink()
+src.unlink()
+for clip in ROOT.glob("scene_*.mp4"): clip.unlink()
