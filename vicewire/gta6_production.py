@@ -29,6 +29,18 @@ async def speak():
  await edge_tts.Communicate(script,voice="en-US-GuyNeural",rate="+5%").save(str(ROOT/"voice.mp3"))
 asyncio.run(speak())
 voice_duration=float(probe(ROOT/"voice.mp3")["duration"])
+if voice_duration > 59:
+ raise RuntimeError(f"Narration too long: {voice_duration:.1f} seconds")
+words=script.split()
+def timestamp(t):
+ h=int(t//3600); m=int(t%3600//60); sec=int(t%60); ms=int((t%1)*1000)
+ return f"{h:02}:{m:02}:{sec:02},{ms:03}"
+cues=[]
+for i in range(0,len(words),7):
+ start=voice_duration*i/len(words)
+ end=voice_duration*min(i+7,len(words))/len(words)
+ cues.append(f"{len(cues)+1}\\n{timestamp(start)} --> {timestamp(end)}\\n{' '.join(words[i:i+7])}\\n")
+(ROOT/"captions.srt").write_text("\\n".join(cues),encoding="utf-8")
 # Build eight varied scene extracts from across the source, retaining original footage.
 segments=8
 clip_length=7.5
@@ -49,4 +61,4 @@ import shutil
 shutil.copyfile(ROOT/"VICEWIRE_GTA6_YouTube_Shorts.mp4",ROOT/"VICEWIRE_GTA6_Instagram_Reel.mp4")
 (ROOT/"POSTING.txt").write_text("YouTube title: Rockstar's GTA 6 World Looks INSANE | VICEWIRE #Shorts\nInstagram caption: Vice City is calling. Here's our GTA 6 breakdown. #GTA6 #ViceCity #RockstarGames #VICEWIRE\nSource: "+SOURCE+"\nNOTE: Voiceover is AI-generated. Review visual accuracy, pacing and rights before uploading.\n")
 # Do not redistribute the full-length source video in the deliverable.
-src.unlink()
+src.unlink()\nfor clip in ROOT.glob("scene_*.mp4"): clip.unlink()
