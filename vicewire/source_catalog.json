@@ -1,0 +1,73 @@
+{
+  "policy": "DISCOVERY_ONLY_NO_AUTOMATIC_DOWNLOAD_OR_REPOST",
+  "sources": [
+    {
+      "title": "GTA VI official video library",
+      "url": "https://www.rockstargames.com/VI/media/videos",
+      "publisher": "Rockstar Games",
+      "topics": [
+        "trailers",
+        "character clips",
+        "locations"
+      ],
+      "rights_status": "permission_required",
+      "audio_status": "not_cleared"
+    },
+    {
+      "title": "GTA VI An Extended Look",
+      "url": "https://www.youtube.com/watch?v=tJbzMqJGH4k",
+      "publisher": "Rockstar Games",
+      "topics": [
+        "gameplay analysis",
+        "police chases",
+        "activities",
+        "world"
+      ],
+      "rights_status": "permission_required",
+      "audio_status": "not_cleared"
+    },
+    {
+      "title": "GTA VI Trailer 2",
+      "url": "https://www.youtube.com/watch?v=VQRLujxTm3c",
+      "publisher": "Rockstar Games",
+      "topics": [
+        "details",
+        "comparison",
+        "characters"
+      ],
+      "rights_status": "permission_required",
+      "audio_status": "licensed_music_not_cleared"
+    },
+    {
+      "title": "Rockstar copyrighted material policy",
+      "url": "https://support.rockstargames.com/articles/7bNaeoMFTV0iUDGhStTXvz/policy-on-posting-copyrighted-rockstar-games-material",
+      "publisher": "Rockstar Games",
+      "topics": [
+        "licensing"
+      ],
+      "rights_status": "reference_only"
+    }
+  ],
+  "content_ideas": [
+    {
+      "hook": "5 details hidden in GTA VI's extended look",
+      "format": "original narrated analysis",
+      "requirement": "fact-check each detail; use licensed footage or original graphics"
+    },
+    {
+      "hook": "What Rockstar actually showed about police chases",
+      "format": "fact-checked explainer",
+      "requirement": "distinguish observed footage from speculation"
+    },
+    {
+      "hook": "GTA VI Trailer 1 vs Trailer 2: what's changed?",
+      "format": "original comparison commentary",
+      "requirement": "obtain rights for excerpts or use original diagrams"
+    },
+    {
+      "hook": "GTA VI beginner tips: what we know before launch",
+      "format": "original tips",
+      "requirement": "do not invent gameplay mechanics"
+    }
+  ]
+}
