@@ -8,7 +8,14 @@ import edge_tts
 ROOT=pathlib.Path("vicewire/output")
 ROOT.mkdir(parents=True,exist_ok=True)
 SOURCE=os.environ.get("SOURCE_URL","https://www.youtube.com/watch?v=tJbzMqJGH4k")
-subprocess.run(["yt-dlp","--no-playlist","-f","bv*[height<=1080]+ba/b[height<=1080]/best","--merge-output-format","mp4","-o",str(ROOT/"source.%(ext)s"),SOURCE],check=True)
+if SOURCE.lower().split("?")[0].endswith((".mp4",".mov",".mkv")) and SOURCE.startswith("https://"):
+ import urllib.request
+ urllib.request.urlretrieve(SOURCE, ROOT/"source.mp4")
+else:
+ try:
+  subprocess.run(["yt-dlp","--no-playlist","-f","bv*[height<=1080]+ba/b[height<=1080]/best","--merge-output-format","mp4","-o",str(ROOT/"source.%(ext)s"),SOURCE],check=True)
+ except subprocess.CalledProcessError:
+  raise SystemExit("SOURCE BLOCKED: YouTube may require age verification. Supply an authorized direct HTTPS MP4 URL via workflow_dispatch source_url; no authentication bypass attempted.")
 src=next(ROOT.glob("source.*"))
 def probe(p):
  return json.loads(subprocess.check_output(["ffprobe","-v","error","-show_format","-of","json",str(p)]))["format"]
