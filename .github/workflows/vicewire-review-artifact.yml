@@ -1,0 +1,27 @@
+name: VICEWIRE authorized footage review artifact
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: vicewire-dry-run
+      - name: Install FFmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - name: Check input and rights gate
+        run: |
+          test -f vicewire/input/authorized_source.mp4 || { echo "Authorized source not present on runner. Use secure upload/integration before running."; exit 1; }
+          python3 vicewire/agent_editor_v2.py --manifest vicewire/review_manifest.json
+      - name: Upload MP4 and validation metadata
+        uses: actions/upload-artifact@v4
+        with:
+          name: vicewire-review-mp4
+          path: |
+            vicewire/output/review.mp4
+            vicewire/output/review.json
+          retention-days: 7
