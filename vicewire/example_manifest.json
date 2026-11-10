@@ -1,0 +1,9 @@
+{
+  "source": "vicewire/input/authorized_source.mp4",
+  "output": "vicewire/output/review.mp4",
+  "start": 0,
+  "duration": 15,
+  "rights_status": "pending",
+  "rights_evidence": "",
+  "publish": false
+}
