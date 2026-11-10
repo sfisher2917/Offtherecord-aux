@@ -3,15 +3,9 @@ on:
   workflow_dispatch:
     inputs:
       source_url:
-        description: Authorized YouTube video URL
+        description: Authorized direct HTTPS MP4 URL (or accessible YouTube URL)
         required: true
         default: https://www.youtube.com/watch?v=tJbzMqJGH4k
-  push:
-    branches:
-      - vicewire-dry-run
-    paths:
-      - .github/workflows/vicewire-gta6-production.yml
-      - vicewire/gta6_production.py
 jobs:
   produce:
     runs-on: ubuntu-latest
