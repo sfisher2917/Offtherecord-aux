@@ -7,8 +7,11 @@ on:
         required: true
         default: https://www.youtube.com/watch?v=tJbzMqJGH4k
   push:
+    branches:
+      - vicewire-dry-run
     paths:
       - .github/workflows/vicewire-gta6-production.yml
+      - vicewire/gta6_production.py
 jobs:
   produce:
     runs-on: ubuntu-latest
