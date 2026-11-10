@@ -1,0 +1,17 @@
+name: VICEWIRE studio synthetic smoke test
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: vicewire-dry-run
+      - name: Install FFmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - name: Run synthetic rendering test
+        run: python3 vicewire/demo_test.py
