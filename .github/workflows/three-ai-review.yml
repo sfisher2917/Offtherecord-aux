@@ -1,0 +1,31 @@
+name: Three AI Reviews (manual, free-only)
+on:
+  workflow_dispatch:
+    inputs:
+      prompt:
+        description: "Non-confidential prompt (max 1000 chars)"
+        required: true
+        type: string
+      approve_request:
+        description: "I verified zero-cost billing and approve 3 free API calls"
+        required: true
+        default: false
+        type: boolean
+permissions:
+  contents: read
+jobs:
+  review:
+    if: ${{ inputs.approve_request && vars.ACTIONS_ZERO_COST_VERIFIED == 'true' && vars.GROQ_FREE_TIER_VERIFIED == 'true' && vars.GEMINI_FREE_TIER_VERIFIED == 'true' && vars.OPENROUTER_FREE_TIER_VERIFIED == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Parallel free model reviews
+        env:
+          PROMPT: ${{ inputs.prompt }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        run: python3 .github/scripts/three_ai_review.py
