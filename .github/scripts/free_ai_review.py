@@ -11,7 +11,7 @@ import urllib.request
 PROVIDERS = {
     "groq": ("GROQ_API_KEY", "https://api.groq.com/openai/v1/chat/completions", "openai/gpt-oss-20b"),
     "openrouter": ("OPENROUTER_API_KEY", "https://openrouter.ai/api/v1/chat/completions", "openrouter/free"),
-    "gemini": ("GEMINI_API_KEY", "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent", "gemini-3.8-flash"),
+    "gemini": ("GEMINI_API_KEY", "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent", "gemini-3.5-flash-lite"),
 }
 REQUEST_TIMEOUT_SECONDS = 100
 
