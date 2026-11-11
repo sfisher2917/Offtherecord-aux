@@ -1,0 +1,34 @@
+name: Free AI Review (Manual Approval Only)
+on:
+  workflow_dispatch:
+    inputs:
+      provider:
+        description: 'Free provider'
+        required: true
+        type: choice
+        options:
+          - groq
+          - gemini
+          - openrouter
+      prompt:
+        description: 'Non-confidential prompt (max 1000 chars; no repository source sent)'
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  free-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Run one explicitly free model
+        env:
+          PROVIDER: ${{ inputs.provider }}
+          PROMPT: ${{ inputs.prompt }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        run: python3 .github/scripts/free_ai_review.py
