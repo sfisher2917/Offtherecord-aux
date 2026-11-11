@@ -13,9 +13,9 @@ const equal=(a,b)=>{const x=Buffer.from(a||''),y=Buffer.from(b||'');return x.len
 async function ask(name,prompt,env,fetcher){
  const m=models[name];
  const headers={authorization:'Bearer '+env[m.secret]};
- const body={model:m.model,messages:[{role:'user',content:prompt}],max_tokens:512};
+ const body={model:m.model,messages:[{role:'user',content:prompt}],max_tokens:2048,...(name==='groq'?{reasoning_effort:'low'}:{reasoning:{effort:'none'}})};
  try{
-  const response=await fetcher(m.url,{method:'POST',headers:{...headers,'content-type':'application/json'},body:JSON.stringify(body),signal:AbortSignal.timeout(12000)});
+  const response=await fetcher(m.url,{method:'POST',headers:{...headers,'content-type':'application/json'},body:JSON.stringify(body),signal:AbortSignal.timeout(30000)});
   if(!response.ok)return {provider:name,status:'failed',http_status:response.status};
   const data=await response.json();
   const answer=data.choices?.[0]?.message?.content;
