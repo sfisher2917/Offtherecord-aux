@@ -1,0 +1,46 @@
+openapi: 3.1.0
+info:
+  title: Free Three-Model Review Gateway
+  version: 1.0.0
+servers:
+  - url: https://REPLACE-WITH-YOUR-WORKER.workers.dev
+paths:
+  /review:
+    post:
+      operationId: reviewWithThreeModels
+      summary: Send one non-sensitive prompt to Gemini, Groq and OpenRouter concurrently.
+      description: Use only after the user agrees to send the prompt to three external providers. Never send secrets, private files or sensitive data.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [prompt]
+              properties:
+                prompt:
+                  type: string
+                  minLength: 1
+                  maxLength: 1000
+      responses:
+        '200':
+          description: Three independent model results for ChatGPT synthesis.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      additionalProperties: true
+                  notice:
+                    type: string
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
