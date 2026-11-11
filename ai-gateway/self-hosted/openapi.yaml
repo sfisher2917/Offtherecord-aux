@@ -4,7 +4,7 @@ info:
   version: 1.0.0
   description: Authenticated three-model review; prompts are transmitted to Gemini, Groq and OpenRouter.
 servers:
-  - url: https://REPLACE_WITH_YOUR_VERIFIED_HTTPS_HOST
+  - url: https://three-model-gateway.onrender.com
 paths:
   /review:
     post:
