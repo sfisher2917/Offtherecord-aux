@@ -1,0 +1,54 @@
+name: Free AI coding (approval only)
+on:
+  workflow_dispatch:
+    inputs:
+      task:
+        description: "Coding task (no secrets or credentials)"
+        required: true
+        type: string
+permissions:
+  contents: write
+  pull-requests: write
+concurrency:
+  group: free-ai-coding
+  cancel-in-progress: false
+jobs:
+  propose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      GH_TOKEN: ${{ github.token }}
+      TASK: ${{ inputs.task }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Check free-only configuration
+        shell: bash
+        run: |
+          test -n "$GEMINI_API_KEY" || { echo "GEMINI_API_KEY secret missing; refusing to run."; exit 1; }
+          test -n "$TASK" || exit 1
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - name: Install OpenCode
+        run: npm install --global @opencode/cli
+      - name: Propose code changes using Gemini free-tier API
+        shell: bash
+        run: |
+          set -euo pipefail
+          opencode run --standalone --model google/gemini-2.5-flash "You are preparing a review-only code change in this repository. Task: $TASK. Never access secrets, deploy, publish, trade, execute financial transactions, or change security/billing settings. Make only the requested source changes; do not commit or push. If the task cannot be safely completed, leave files unchanged and explain why." 
+      - name: Open draft pull request (never merge)
+        shell: bash
+        run: |
+          set -euo pipefail
+          if test -z "$(git status --porcelain)"; then
+            echo "No changes proposed."
+            exit 0
+          fi
+          BRANCH="ai/free-proposal-${GITHUB_RUN_ID}"
+          git switch -c "$BRANCH"
+          git add -A
+          git commit -m "AI proposal: review required"
+          git push origin "$BRANCH"
+          gh pr create --draft --base "${GITHUB_REF_NAME}" --head "$BRANCH" --title "AI proposal (review required): ${TASK:0:70}" --body "Generated with OpenCode and an explicitly selected Gemini model. **Review and test before merging.** No automatic merge, deployment, or trading. Free-tier eligibility and provider quotas must be verified in the provider account."
