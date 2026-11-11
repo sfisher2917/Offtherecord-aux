@@ -1,0 +1,47 @@
+name: Free AI Review (Manual Approval Only)
+on:
+  workflow_dispatch:
+    inputs:
+      provider:
+        description: 'Free provider'
+        required: true
+        type: choice
+        options:
+          - groq
+          - gemini
+          - openrouter
+      prompt:
+        description: 'Non-confidential prompt (max 1000 chars; no repository source sent)'
+        required: true
+        type: string
+      approve_request:
+        description: 'Approve this single request after confirming the provider is still free'
+        required: true
+        default: false
+        type: boolean
+# These variables are owner attestations, not automatic billing verification.
+# Leave unset until the account and GitHub billing settings have been inspected.
+permissions:
+  contents: read
+jobs:
+  free-review:
+    if: >-
+      ${{ inputs.approve_request &&
+          vars.ACTIONS_ZERO_COST_VERIFIED == 'true' &&
+          ((inputs.provider == 'groq' && vars.GROQ_FREE_TIER_VERIFIED == 'true') ||
+           (inputs.provider == 'gemini' && vars.GEMINI_FREE_TIER_VERIFIED == 'true') ||
+           (inputs.provider == 'openrouter' && vars.OPENROUTER_FREE_TIER_VERIFIED == 'true')) }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Run one explicitly free model
+        env:
+          PROVIDER: ${{ inputs.provider }}
+          PROMPT: ${{ inputs.prompt }}
+          GROQ_API_KEY: ${{ inputs.provider == 'groq' && secrets.GROQ_API_KEY || '' }}
+          GEMINI_API_KEY: ${{ inputs.provider == 'gemini' && secrets.GEMINI_API_KEY || '' }}
+          OPENROUTER_API_KEY: ${{ inputs.provider == 'openrouter' && secrets.OPENROUTER_API_KEY || '' }}
+        run: python3 .github/scripts/free_ai_review.py
