@@ -1,15 +1,15 @@
 openapi: 3.1.0
 info:
-  title: Self-hosted three-model gateway
-  version: 1.0.0
-  description: Authenticated three-model review; prompts are transmitted to Gemini, Groq and OpenRouter.
+  title: Self-hosted two-provider gateway
+  version: 2.0.0
+  description: Authenticated two-provider review; prompts are transmitted to Groq and OpenRouter.
 servers:
   - url: https://three-model-gateway.onrender.com
 paths:
   /review:
     post:
-      operationId: reviewWithThreeModels
-      summary: Ask three AI providers concurrently
+      operationId: reviewWithTwoProviders
+      summary: Ask two AI providers concurrently
       security:
         - bearerAuth: []
       requestBody:

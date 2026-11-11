@@ -8,7 +8,6 @@ on:
         type: choice
         options:
           - groq
-          - gemini
           - openrouter
       prompt:
         description: 'Non-confidential prompt (max 1000 chars; no repository source sent)'
@@ -29,7 +28,6 @@ jobs:
       ${{ inputs.approve_request &&
           vars.ACTIONS_ZERO_COST_VERIFIED == 'true' &&
           ((inputs.provider == 'groq' && vars.GROQ_FREE_TIER_VERIFIED == 'true') ||
-           (inputs.provider == 'gemini' && vars.GEMINI_FREE_TIER_VERIFIED == 'true') ||
            (inputs.provider == 'openrouter' && vars.OPENROUTER_FREE_TIER_VERIFIED == 'true')) }}
     runs-on: ubuntu-latest
     timeout-minutes: 3
@@ -42,6 +40,5 @@ jobs:
           PROVIDER: ${{ inputs.provider }}
           PROMPT: ${{ inputs.prompt }}
           GROQ_API_KEY: ${{ inputs.provider == 'groq' && secrets.GROQ_API_KEY || '' }}
-          GEMINI_API_KEY: ${{ inputs.provider == 'gemini' && secrets.GEMINI_API_KEY || '' }}
           OPENROUTER_API_KEY: ${{ inputs.provider == 'openrouter' && secrets.OPENROUTER_API_KEY || '' }}
         run: python3 .github/scripts/free_ai_review.py

@@ -28,7 +28,7 @@ class ReviewTests(unittest.TestCase):
 
     def test_success_has_one_request_and_fixed_free_model(self):
         for provider in review.PROVIDERS:
-            data = {"candidates": [{"content": {"parts": [{"text": "OK"}]}}]} if provider == "gemini" else {"choices": [{"message": {"content": "OK"}}]}
+            data = {"choices": [{"message": {"content": "OK"}}]}
             result, opened, output = self.run_case(provider, response=data)
             self.assertEqual(result, 0)
             opened.assert_called_once()
@@ -36,9 +36,8 @@ class ReviewTests(unittest.TestCase):
             body = json.loads(request.data)
             self.assertEqual(opened.call_args.kwargs["timeout"], 100)
             self.assertEqual(request.get_header("User-agent"), "Fisher-Free-AI-Review/1.0")
-            if provider != "gemini":
-                self.assertEqual(body["model"], review.PROVIDERS[provider][2])
-                self.assertEqual(body["max_tokens"], 512)
+            self.assertEqual(body["model"], review.PROVIDERS[provider][2])
+            self.assertEqual(body["max_tokens"], 512)
             self.assertIn("Provider output: OK", output)
 
     def test_short_masked_or_whitespace_keys_make_no_request(self):

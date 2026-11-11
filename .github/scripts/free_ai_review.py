@@ -11,7 +11,6 @@ import urllib.request
 PROVIDERS = {
     "groq": ("GROQ_API_KEY", "https://api.groq.com/openai/v1/chat/completions", "openai/gpt-oss-20b"),
     "openrouter": ("OPENROUTER_API_KEY", "https://openrouter.ai/api/v1/chat/completions", "openrouter/free"),
-    "gemini": ("GEMINI_API_KEY", "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent", "gemini-3.8-flash"),
 }
 REQUEST_TIMEOUT_SECONDS = 100
 
@@ -37,12 +36,8 @@ def main():
         sys.exit("Missing secret: " + secret)
     if len(key) < 20 or re.search(r"[\s*\u2022\u2026]", key):
         sys.exit("Incomplete or masked API key; replace the encrypted repository secret")
-    if provider == "gemini":
-        body = {"contents": [{"parts": [{"text": prompt}]}], "generationConfig": {"maxOutputTokens": 512}}
-        headers = {"x-goog-api-key": key}
-    else:
-        body = {"model": model, "messages": [{"role": "user", "content": prompt}], "max_tokens": 512}
-        headers = {"Authorization": "Bearer " + key}
+    body = {"model": model, "messages": [{"role": "user", "content": prompt}], "max_tokens": 512}
+    headers = {"Authorization": "Bearer " + key}
     headers.update({"Content-Type": "application/json", "User-Agent": "Fisher-Free-AI-Review/1.0"})
     request = urllib.request.Request(url, data=json.dumps(body).encode(), headers=headers, method="POST")
     try:
@@ -63,11 +58,8 @@ def main():
     except ValueError:
         print("Provider returned an invalid JSON response")
         return 1
-    if provider == "gemini":
-        result = "\n".join(part.get("text", "") for candidate in data.get("candidates", []) for part in candidate.get("content", {}).get("parts", []))
-    else:
-        choices = data.get("choices") or []
-        result = choices[0].get("message", {}).get("content", "") if choices else ""
+    choices = data.get("choices") or []
+    result = choices[0].get("message", {}).get("content", "") if choices else ""
     if not isinstance(result, str) or not result.strip():
         print("Provider returned no answer text; this is not a successful connection test")
         return 1

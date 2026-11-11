@@ -1,20 +1,20 @@
-name: Three AI Cloud Review (manual, zero-cost gate)
+name: Two AI Cloud Review (manual, zero-cost gate)
 on:
   workflow_dispatch:
     inputs:
       prompt:
-        description: 'Non-sensitive prompt (sent to three external AI providers)'
+        description: 'Non-sensitive prompt (sent to two external AI providers)'
         required: true
         type: string
       approve_external_transfer:
-        description: 'I approve sending this prompt to all three providers'
+        description: 'I approve sending this prompt to both providers'
         required: true
         default: false
         type: boolean
 permissions:
   contents: read
 concurrency:
-  group: three-ai-cloud-review
+  group: two-ai-cloud-review
   cancel-in-progress: false
 jobs:
   review:
@@ -25,10 +25,9 @@ jobs:
       - uses: actions/checkout@v4
       - name: Test gateway offline
         run: node --test ai-gateway/self-hosted/server.test.js
-      - name: Review with three models
+      - name: Review with two models
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           GATEWAY_TOKEN: ephemeral-internal-runner
           ENABLED: 'true'
@@ -39,8 +38,8 @@ jobs:
           node --input-type=module <<'NODE'
           import {createHandler} from './ai-gateway/self-hosted/server.js';
           import {Readable} from 'node:stream';
-          if (!process.env.GROQ_API_KEY || !process.env.GEMINI_API_KEY || !process.env.OPENROUTER_API_KEY) {
-            throw Error('All three provider secrets must be configured');
+          if (!process.env.GROQ_API_KEY || !process.env.OPENROUTER_API_KEY) {
+            throw Error('Both provider secrets must be configured');
           }
           const req=Readable.from([JSON.stringify({prompt:process.env.REVIEW_PROMPT})]);
           req.url='/review';req.method='POST';
@@ -49,7 +48,7 @@ jobs:
           await createHandler()(req,res);
           if(res.status!==200)throw Error('Gateway returned '+res.status);
           const data=JSON.parse(res.body);
-          const summary=['# Three-model review',...data.results.map(x=>'## '+x.provider+' ('+x.status+')\n\n'+(x.answer||'No answer returned'))].join('\n\n');
+          const summary=['# Two-provider review',...data.results.map(x=>'## '+x.provider+' ('+x.status+')\n\n'+(x.answer||'No answer returned'))].join('\n\n');
           await import('node:fs/promises').then(fs=>fs.appendFile(process.env.GITHUB_STEP_SUMMARY,summary));
           if(data.results.some(x=>x.status!=='ok'))process.exitCode=1;
           NODE
