@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: three-model-gateway
+    runtime: docker
+    plan: free
+    rootDir: ai-gateway/self-hosted
+    dockerfilePath: ./Dockerfile
+    autoDeploy: false
+    healthCheckPath: /health
+    envVars:
+      - key: ENABLED
+        value: "false"
+      - key: ZERO_COST_VERIFIED
+        value: "false"
+      - key: MAX_REQUESTS_PER_PROCESS
+        value: "10"
+      - key: GATEWAY_TOKEN
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: OPENROUTER_API_KEY
+        sync: false
