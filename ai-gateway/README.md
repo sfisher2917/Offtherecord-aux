@@ -14,3 +14,12 @@ Requires a long random GATEWAY_TOKEN using Authorization: Bearer; secrets remain
 ## Important
 A Custom GPT cannot intercept all ordinary ChatGPT conversations. Custom GPT retirement/migration to Plugins has been announced; consider a plugin implementation before relying on this long-term.
 Cloudflare free quotas are not the same as a guaranteed $0 bill. No system can independently guarantee provider billing account status. Do not enable until verified.
+
+
+## Free-first fallback architecture
+- Gateway code is portable JavaScript using standard Fetch APIs; no paid orchestration framework, database, or proprietary SDK is required.
+- If Cloudflare is unavailable, deploy the same HTTP handler to another provider with a verified free allowance. Deployment and provider account setup still require authorization and cannot be replaced by repository code alone.
+- For development without hosting, run a local mock endpoint or manually dispatch the existing GitHub three-provider review workflow only after confirming GitHub Actions billing limits.
+- Keep separate controls for external-provider request approval, provider free-tier verification, and infrastructure cost verification. Do not interpret environment variables as proof of account-level billing status.
+- The public health endpoint must never reveal credentials. Never place API keys or gateway tokens in git or GitHub issues.
+- This is a proposed system, not a verified live service. Do not activate until a genuine end-to-end test succeeds.
