@@ -1,0 +1,53 @@
+openapi: 3.1.0
+info:
+  title: Self-hosted three-model gateway
+  version: 1.0.0
+  description: Authenticated three-model review; prompts are transmitted to Gemini, Groq and OpenRouter.
+servers:
+  - url: https://REPLACE_WITH_YOUR_VERIFIED_HTTPS_HOST
+paths:
+  /review:
+    post:
+      operationId: reviewWithThreeModels
+      summary: Ask three AI providers concurrently
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required: [prompt]
+              properties:
+                prompt:
+                  type: string
+                  minLength: 1
+                  maxLength: 1000
+      responses:
+        '200':
+          description: Independent provider responses
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      additionalProperties: true
+                  notice:
+                    type: string
+        '401':
+          description: Unauthorized
+        '429':
+          description: Process request limit reached
+        '503':
+          description: Disabled or missing credentials
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
