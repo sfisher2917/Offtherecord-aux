@@ -23,3 +23,8 @@ Cloudflare free quotas are not the same as a guaranteed $0 bill. No system can i
 - Keep separate controls for external-provider request approval, provider free-tier verification, and infrastructure cost verification. Do not interpret environment variables as proof of account-level billing status.
 - The public health endpoint must never reveal credentials. Never place API keys or gateway tokens in git or GitHub issues.
 - This is a proposed system, not a verified live service. Do not activate until a genuine end-to-end test succeeds.
+
+## Run security tests without an API key
+Run `npm test` in a checkout of this proposal branch with Node.js 20+. The test suite uses no external dependencies and does not make network requests. It validates authentication, fail-closed controls and input validation. Tests are not proof that external provider models or free billing work.
+## Activation gate
+No activation is permitted merely because the code exists. Verify the three free provider accounts, the hosting plan, API credentials, authentication token, deployment URL, and actual integration test. A Custom GPT must be configured separately; it cannot transparently intercept all standard ChatGPT requests.
